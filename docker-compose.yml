@@ -1,4 +1,5 @@
 web: 
+    container_name: investr-docker-nginx
     image: nginx:latest
     ports:
         - "8080:80"
@@ -11,6 +12,7 @@ web:
         - php
 
 php:
+    container_name: investr-docker-php
     image: php:7-fpm
     ports:
         - 9000:9000
@@ -18,6 +20,7 @@ php:
         - ./public:/var/www/html
 
 mysql:
+    container_name: investr-docker-mysql
     image: mariadb
     environment:
         MYSQL_ROOT_PASSWORD: admin

@@ -16,6 +16,16 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Create investr database
+--
+CREATE DATABASE IF NOT EXISTS investr;
+
+--
+-- Use investr database
+--
+USE investr;
+
+--
 -- Table structure for table `HISTORICAL_SCORE`
 --
 
