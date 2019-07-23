@@ -1,0 +1,1 @@
+2019/07/23 05:40:10 [error] 7#7: *1 open() "/var/www/html/favicon.ico" failed (2: No such file or directory), client: 122.171.115.245, server: investr.co.in, request: "GET /favicon.ico HTTP/1.1", host: "investr.co.in:8080"

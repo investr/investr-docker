@@ -1,0 +1,24 @@
+web: 
+    image: nginx:latest
+    ports:
+        - "8080:80"
+    volumes:
+        - ./public:/var/www/html
+        - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+        - ./logs/nginx-error.log:/var/log/nginx/error.log
+        - ./logs/nginx-access.log:/var/log/nginx/access.log
+    links:
+        - php
+
+php:
+    image: php:7-fpm
+    ports:
+        - 9000:9000
+    volumes:
+        - ./public:/var/www/html
+
+mysql:
+    image: mariadb
+    environment:
+        MYSQL_ROOT_PASSWORD: admin
+

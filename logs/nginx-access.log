@@ -1,0 +1,4 @@
+122.171.115.245 - - [23/Jul/2019:05:40:10 +0000] "GET / HTTP/1.1" 200 86665 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0"
+122.171.115.245 - - [23/Jul/2019:05:40:10 +0000] "GET /favicon.ico HTTP/1.1" 404 153 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0"
+122.171.115.245 - - [23/Jul/2019:05:41:15 +0000] "GET / HTTP/1.1" 200 86665 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0"
+122.171.115.245 - - [23/Jul/2019:05:41:15 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0"
