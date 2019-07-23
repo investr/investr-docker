@@ -1,14 +1,16 @@
 <?php
-    $dbhost = '172.17.0.2';
-    $dbuser = 'root';
-    $dbpass = 'admin';
-    $dbname = 'investr';
+$link = mysqli_connect("172.17.0.2", "root", "admin", "investr");
 
-    $mysql_conn_string = "mysql:host=$dbhost;dbname=$dbname";
-    $dbConnection = new PDO($mysql_conn_string, $dbuser, $dbpass);
+if (!$link) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
 
-    $stmt = $pdo->query('SELECT COMMENT FROM DOCKER_TEMP');
-    {
-        echo $row['COMMENT'] . "\n";
-    }
+echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
+echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
+
+mysqli_close($link);
 ?>
+

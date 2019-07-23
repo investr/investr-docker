@@ -9,8 +9,17 @@ Hence as of now I am using the following command:
 docker exec -i investr-docker-mysql sh -c 'exec mysql -uroot -p"admin"' < ./mysql/init.sql
 
 ### Installing Slim (for PHP)
-Change into "public" directory: cd public
+Change into "public" directory: 
+cd public
 
 and then install Slim using the following command:
 
 docker run --rm -v $(pwd):/app composer/composer:latest require slim/slim "^3.0"
+
+### Installing mysqli package on PHP
+docker exec -ti <your-php-container> sh
+$ docker-php-ext-install mysqli
+$ docker-php-ext-enable mysqli
+$ docker-php-ext-install pdo_mysql
+$ docker-php-ext-enable pdo_mysql 
+Now restart the container
