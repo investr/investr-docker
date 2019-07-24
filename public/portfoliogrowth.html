@@ -1,0 +1,247 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="True" name="HandheldFriendly"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="viewport" content="width=device-width"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+
+        <script type="text/javascript">
+            function isLastDay(dt) {
+                return new Date(dt.getTime() + 86400000).getDate() === 1;
+            }
+
+            function getGrowth(earlier, later) {
+                return (later-earlier)*100/earlier;
+            }
+
+            $(function() {
+                var restURL = '/portfoliogrowth/' + getUserLoggedIn();
+                $.getJSON(restURL, function(d) {
+
+                    var dt = new Array();
+                    var move = new Array();
+                    var current = new Array();
+                    var notes = new Array();
+                    var finYears = new Array();
+                    var years = new Array();
+                    var qtrs = new Array();
+                    var months = new Array();
+                    var weeks = new Array();
+                    var weeksGrowth = new Array();
+                    var monthsGrowth = new Array();
+                    var qtrsGrowth = new Array();
+                    var yearsGrowth = new Array();
+                    var finYearsGrowth = new Array();
+                    var ytd = 0.0;
+                    var ytdGrowth = 0.0;
+                    var yoy = 0.0;
+                    var yoyGrowth = 0.0;
+                    var lastMove = parseFloat(d[d.length-1]['M']);
+                    var lastCurrent = parseFloat(d[d.length-1]['C']);
+                    var lastWeeksGrowth = 0.0;
+                    if (d.length > 6)
+                        lastWeeksGrowth = getGrowth(parseFloat(d[d.length-6]['C']), lastCurrent);
+                    var lastMonthsGrowth = 0.0;
+                    if (d.length > 30)
+                        lastMonthsGrowth = getGrowth(parseFloat(d[d.length-30]['C']), lastCurrent);
+                    var ttmGrowth = 0.0;
+                    if (d.length > 364)
+                        ttmGrowth = getGrowth(parseFloat(d[d.length-364]['C']), lastCurrent);
+
+                    for (var i = 0; i < d.length; i++) {
+                        dt.push(d[i]['D']);
+                        move.push(parseFloat(d[i]['M']));
+                        current.push(parseFloat(d[i]['C']));
+                        notes.push(d[i]['N']);
+
+                        if (new Date(d[i]['D']).getDay() == 5)
+                            weeks.push([d[i]['D'], parseFloat(d[i]['C'])]);
+
+                        if (isLastDay(new Date(d[i]['D'])))
+                            months.push([d[i]['D'], parseFloat(d[i]['C'])]);
+
+                        if (d[i]['D'].endsWith("-03-31") || d[i]['D'].endsWith("-06-30") ||
+                            d[i]['D'].endsWith("-09-30") || d[i]['D'].endsWith("-12-31"))
+                            qtrs.push([d[i]['D'], parseFloat(d[i]['C'])]);
+
+                        if (d[i]['D'].endsWith("-04-01"))
+                            finYears.push([d[i]['D'], parseFloat(d[i]['C'])]);
+
+                        if (d[i]['D'].endsWith("-12-31"))
+                            years.push([d[i]['D'], parseFloat(d[i]['C'])]);
+
+                        if (d[i]['D'] === "2017-12-31")
+                            ytd = parseFloat(d[i]['C']);
+                    }
+
+                    for (var i = 1; i < weeks.length; i++) {
+                        weeksGrowth.push([weeks[i][0], getGrowth(weeks[i-1][1], weeks[i][1])]);
+                    }
+                    for (var i = 1; i < months.length; i++) {
+                        monthsGrowth.push([months[i][0], getGrowth(months[i-1][1], months[i][1])]);
+                    }
+                    for (var i = 1; i < qtrs.length; i++) {
+                        qtrsGrowth.push([qtrs[i][0], getGrowth(qtrs[i-1][1], qtrs[i][1])]);
+                    }
+                    for (var i = 1; i < years.length; i++) {
+                        yearsGrowth.push([years[i][0], getGrowth(years[i-1][1], years[i][1])]);
+                    }
+                    for (var i = 1; i < finYears.length; i++) {
+                        finYearsGrowth.push([finYears[i][0], getGrowth(finYears[i-1][1], finYears[i][1])]);
+                    }
+                    ytdGrowth = getGrowth(ytd, lastCurrent);
+
+                    google.charts.load('current', {'packages':['annotationchart', 'calendar', 'gauge', 'corechart']});
+
+                    google.charts.setOnLoadCallback(drawGuageChart);
+                    function drawGuageChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['Label', 'Value'],
+                            ['Day', lastMove],
+                            ['Week', lastWeeksGrowth],
+                            ['Month', lastMonthsGrowth],
+                            ['TTM', ttmGrowth],
+                            ['YTD', ytdGrowth]
+                        ]);
+
+                        var options = {
+                            width: 700, height: 150,
+                            min: -10,
+                            max: 20,
+                            redFrom: -10, redTo: 0,
+                            yellowFrom: 0, yellowTo: 10,
+                            greenFrom: 10, greenTo: 20,
+                            minorTicks: 1
+                        };
+
+                        var chart = new google.visualization.Gauge(document.getElementById('guage_chart_div'));
+                        chart.draw(data, options);
+                    }
+
+                    google.charts.setOnLoadCallback(drawWeeksChart);
+                    function drawWeeksChart() {
+                        var data = new google.visualization.DataTable();
+
+                        data.addColumn('string', 'Date');
+                        data.addColumn('number', 'Weekly Growth');
+
+                        for(i = 0; i < weeksGrowth.length; i++) {
+                            data.addRow([weeksGrowth[i][0], weeksGrowth[i][1]]);
+                        }
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('weeks_chart_div'));
+                        chart.draw(data);
+                    }
+
+                    google.charts.setOnLoadCallback(drawMonthsChart);
+                    function drawMonthsChart() {
+                        var data = new google.visualization.DataTable();
+
+                        data.addColumn('string', 'Date');
+                        data.addColumn('number', 'Monthly Growth');
+
+                        for(i = 0; i < monthsGrowth.length; i++) {
+                            data.addRow([monthsGrowth[i][0], monthsGrowth[i][1]]);
+                        }
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('months_chart_div'));
+                        chart.draw(data);
+                    }
+
+                    google.charts.setOnLoadCallback(drawQtrsChart);
+                    function drawQtrsChart() {
+                        var data = new google.visualization.DataTable();
+
+                        data.addColumn('string', 'Date');
+                        data.addColumn('number', 'Quarterly Growth');
+
+                        for(i = 0; i < qtrsGrowth.length; i++) {
+                            data.addRow([qtrsGrowth[i][0], qtrsGrowth[i][1]]);
+                        }
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('qtrs_chart_div'));
+                        chart.draw(data);
+                    }
+
+                    google.charts.setOnLoadCallback(drawYearsChart);
+                    function drawYearsChart() {
+                        var data = new google.visualization.DataTable();
+
+                        data.addColumn('string', 'Date');
+                        data.addColumn('number', 'Years Growth');
+
+                        for(i = 0; i < yearsGrowth.length; i++) {
+                            data.addRow([yearsGrowth[i][0], yearsGrowth[i][1]]);
+                        }
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('years_chart_div'));
+                        chart.draw(data);
+                    }
+
+                    google.charts.setOnLoadCallback(drawFinYearsChart);
+                    function drawFinYearsChart() {
+                        var data = new google.visualization.DataTable();
+
+                        data.addColumn('string', 'Date');
+                        data.addColumn('number', 'Finincial Years Growth');
+
+                        for(i = 0; i < finYearsGrowth.length; i++) {
+                            data.addRow([finYearsGrowth[i][0], finYearsGrowth[i][1]]);
+                        }
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('finYears_chart_div'));
+                        chart.draw(data);
+                    }
+
+                    google.charts.setOnLoadCallback(drawATLChart);
+                    function drawATLChart() {
+                        var data = new google.visualization.DataTable();
+
+                        data.addColumn('date', 'Date');
+                        data.addColumn('number', 'Current');
+                        data.addColumn('string', 'Notes');
+
+                        for(i = 0; i < dt.length; i++) {
+                            data.addRow([new Date(dt[i]), current[i], notes[i]]);
+                        }
+
+                        var chart = new google.visualization.AnnotationChart(document.getElementById('timeline_chart_div'));
+                        chart.draw(data, {displayAnnotations: true, min:100});
+                    }
+
+                    google.charts.setOnLoadCallback(drawCalendarChart);
+                    function drawCalendarChart() {
+                        var data = new google.visualization.DataTable();
+
+                        data.addColumn('date', 'Date');
+                        data.addColumn('number', 'Move');
+
+                        for(i = 0; i < dt.length; i++) {
+                            data.addRow([new Date(dt[i]), move[i]]);
+                        }
+
+                        var chart = new google.visualization.Calendar(document.getElementById('calendar_chart_div'));
+                        chart.draw(data);
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+            <div id="guage_chart_div" style="margin: 0 auto; display:block; width: 700px; height: 150;"></div>
+            <div id="timeline_chart_div" style="margin: 0 auto; display:block; width: 1100px; height: 400;"></div>
+            <div id="weeks_chart_div" style="margin: 0 auto; display:block; width: 1100px; height: 400;"></div>
+            <div id="months_chart_div" style="margin: 0 auto; display:block; width: 1100px; height: 400;"></div>
+            <div id="qtrs_chart_div" style="margin: 0 auto; display:block; width: 1100px; height: 400;"></div>
+            <div id="finYears_chart_div" style="margin: 0 auto; display:block; width: 500px; height: 400;"></div>
+            <div id="years_chart_div" style="margin: 0 auto; display:block; width: 500px; height: 400;"></div>
+            <div id="calendar_chart_div" style="margin: 0 auto; display:block; width: 1100px; height: 900;"></div>
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="investr.css">
+    <link rel="stylesheet" type="text/css" href="nowcards.css">
+    <script type="text/javascript">$(function(){drawStockChart(getURLParameter("id"));logUserSessions();});</script>
+  </head>
+  <body>
+    <center>
+      <section class="card">
+        <h1><span id="companyName"></span></h1>
+      </section>
+      <section class="card">
+        <table style="width:800px;">
+          <tr>
+            <td>&loz; <span id="marketCap"></span></td>
+            <td>&loz; <span id="peRange"></span></td>
+          </tr>
+          <tr>
+            <td>&loz; <span id="tlGrowth"></span></td>
+            <td>&loz; <span id="blGrowth"></span></td>
+          </tr>
+            <tr>
+            <td>&loz; <span id="fwPe"></span></td>
+            <td>&loz; <span id="pbv"></span></td>
+          </tr>
+          <tr>
+            <td>&loz; <span id="margin"></span></td>
+            <td>&loz; <span id="interest"></span></td>
+          </tr>
+          <tr>
+            <td>&loz; <span id="yoyQtrlyTLGwth"></span></td>
+            <td>&loz; <span id="movingAverage"></span></td>
+          </tr>
+          <tr>
+            <td>&loz; <span id="roa"></span></td>
+            <td>&loz; <span id="cr"></span></td>
+          </tr>
+          <tr>
+            <td>&loz; <span id="wc"></span></td>
+            <td>&loz; <span id="score"></span></td>
+          </tr>
+          <tr>
+            <td>&loz; <span id="eps"></span></td>
+            <td>&loz; <span id="epsGwth"></span></td>
+          </tr>
+        </table>
+      </section>
+      <section class="card">
+        <h1>Historical Score vs PE vs Normalized Price</h1>
+        <div class="companyCharts" id="hisscr_chart_div"></div>
+      </section>
+      <section class="card">
+        <h1>YoY, QoQ and TTM Growth Values</h1>
+        <div class="companyCharts" id="chart_div_growth"></div>
+      </section>
+      <section class="card">
+        <h1>Net Income, Net Profit and Margin(%) for the Last 5 Quarters</h1>
+        <div class="companyCharts" id="chart_div_qtr_big"></div>
+      </section>
+      <section class="card">
+        <h1>Interest (Provisions/Writeoffs) & EPS for the Last 5 Quarters</h1>
+        <div class="companyCharts" id="chart_div_qtr_small"></div>
+      </section>
+      <section class="card">
+        <h1>Net Income, Net Profit and Margin for the Last Few Years</h1>
+        <div class="companyCharts" id="chart_div_year_big"></div>
+      </section>
+      <section class="card">
+        <h1>Interest (Provisions/Writeoffs) & EPS for the Last Few Years</h1>
+        <div class="companyCharts" id="chart_div_year_small"></div>
+      </section>
+    </center>
+    <div id="footer"></div>
+  </body>
+</html>

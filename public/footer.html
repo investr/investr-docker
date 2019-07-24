@@ -1,0 +1,23 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            $(document).ready(function(){
+                if (typeof localStorage.InvestrUser === 'undefined' || localStorage.getItem("InvestrUser") === "null") {
+                } else {
+                    document.getElementById('signinprob').parentNode.removeChild(document.getElementById('signinprob'));
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <footer style="font-size: 80%;">
+            <p><a href='news.html' target="_blank">News</a> - <a href='about.html' target="_blank">About</a> - <a href='help.html' target="_blank">Help</a> - <a href='contact.html' target="_blank">Contact</a> - <a href='privacy.html' target="_blank">Privacy Policy</a></p>
+            <div id="signinprob" style="color: red;"><a href='problem.html' target="_blank">Sign-In Problems?</a></div>
+              <p>Information is provided "as is" and solely for informational purposes, not for trading purposes or advice, and may be delayed.</p>
+        </footer>
+    </body>
+</html>

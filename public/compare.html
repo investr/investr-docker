@@ -1,0 +1,122 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Investr.co.in: Compare Any 2</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="investr.css">
+    <link rel="stylesheet" type="text/css" href="nowcards.css">
+    <script type="text/javascript">$(function(){compareStocks(getURLParameter("id1"),getURLParameter("id2"));logUserSessions();});</script>
+  </head>
+  <body>
+    <center>
+      <section class="card">
+        <h1><div id="betterCompany"></div></h1>
+      </section>
+      <section class="card">
+        <table>
+          <tr>
+            <td style="text-align:right"><div id="companyName1"></div></td>
+            <td style="text-align:center"><div id="companyNameCmp"></div></td>
+            <td><div id="companyName2"></div></td>
+          </tr>
+        </table>
+      </section>
+      <section class="card">
+        <table>
+          <tr>
+            <td style="text-align:right"><div id="marketCap1"></div></td>
+            <td style="text-align:center"><div id="marketCapCmp"></div></td>
+            <td><div id="marketCap2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="pe1"></div></td>
+            <td style="text-align:center"><div id="peCmp"></div></td>
+            <td><div id="pe2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="peRange1"></div></td>
+            <td style="text-align:center"><div id="peRangeCmp"></div></td>
+            <td><div id="peRange2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="peg1"></div></td>
+            <td style="text-align:center"><div id="pegCmp"></div></td>
+            <td><div id="peg2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="dy1"></div></td>
+            <td style="text-align:center"><div id="dyCmp"></div></td>
+            <td><div id="dy2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="score1"></div></td>
+            <td style="text-align:center"><div id="scoreCmp"></div></td>
+            <td><div id="score2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="tlGrowth1"></div></td>
+            <td style="text-align:center"><div id="tlGrowthCmp"></div></td>
+            <td><div id="tlGrowth2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="blGrowth1"></div></td>
+            <td style="text-align:center"><div id="blGrowthCmp"></div></td>
+            <td><div id="blGrowth2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="fwPe1"></div></td>
+            <td style="text-align:center"><div id="fwPeCmp"></div></td>
+            <td><div id="fwPe2"></div></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="pbv1"></div></td>
+            <td style="text-align:center"><div id="pbvCmp"></div></td>
+            <td><div id="pbv2"></div></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="margin1"></div></td>
+            <td style="text-align:center"><div id="marginCmp"></div></td>
+            <td><div id="margin2"></div></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="interest1"></div></td>
+            <td style="text-align:center"><div id="interestCmp"></div></td>
+            <td><div id="interest2"></div></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="yoyQtrlyTLGwth1"></div></td>
+            <td style="text-align:center"><div id="yoyQtrlyTLGwthCmp"></div></td>
+            <td><div id="yoyQtrlyTLGwth2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="movingAverage1"></div></td>
+            <td style="text-align:center"><div id="movingAverageCmp"></div></td>
+            <td><div id="movingAverage2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="roa1"></div></td>
+            <td style="text-align:center"><div id="roaCmp"></div></td>
+            <td><div id="roa2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="cr1"></div></td>
+            <td style="text-align:center"><div id="crCmp"></div></td>
+            <td><div id="cr2"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align:right"><div id="wc1"></div></td>
+            <td style="text-align:center"><div id="wcCmp"></div></td>
+            <td><div id="wc2"></div></td>
+          </tr>
+        </table>
+      </section>
+    </center>
+    <div id="footer"></div>
+  </body>
+</html>

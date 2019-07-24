@@ -1,0 +1,310 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="theme-color" content="#237720"/>
+        <meta content="True" name="HandheldFriendly"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="viewport" content="width=device-width"/>
+        <meta name="google-signin-client_id" content="98035188385-if2hvjojr96255tpuob52frr2eg146h5.apps.googleusercontent.com">
+
+        <title>InvestR.co.in: Stock Screener For Investors Investing In Indian Equities</title>
+        <meta name="description" content="Investr is a stock screener that screens companies based on personalized weighted scores. It also highlights companies that are trading at attractive valuations. Investr also reports whether or not a company's top-line and bottom-line growth is consistent and if a company is trading above or below its 30 day moving average. All this information is supported via beautiful and intuitive charts.">
+
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyloadxt/1.1.0/jquery.lazyloadxt.extra.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="investr.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+        <style>
+
+            html, body {
+                margin: 0;
+                padding: 0
+            }
+
+            #headerBar {
+                height: 25px;
+                background: #00ccff;
+                color:white;
+                text-align: center;
+            }
+
+            #headerBarDonate {
+                height: 25px;
+                background: #60FFAF;
+                color:black;
+                text-align: center;
+            }
+
+            section {
+                display: none;
+                border-top: 1px solid #ddd;
+            }
+
+            input {
+                display: none;
+            }
+
+            label {
+                display: inline-block;
+                margin: 0 0 -1px;
+                padding: 10px 10px;
+                text-align: center;
+                color: #bbb;
+                border: 1px solid transparent;
+            }
+
+            label:before {
+                font-family: fontawesome;
+                font-weight: normal;
+                margin-right: 10px;
+            }
+
+            label[for*='1']:before {
+                content: '\f164';
+            }
+
+            label[for*='2']:before {
+                content: '\f044';
+            }
+
+            label[for*='3']:before {
+                content: '\f219';
+            }
+
+            label[for*='4']:before {
+                content: '\f200';
+            }
+
+            label[for*='5']:before {
+                content: '\f0ac';
+            }
+
+            label[for*='6']:before {
+                content: '\f06e';
+            }
+
+            label:hover {
+                color: #888;
+                cursor: pointer;
+            }
+
+            input:checked + label {
+                color: #555;
+                border: 1px solid #ddd;
+                border-top: 2px solid orange;
+                border-bottom: 1px solid #fff;
+            }
+
+            #tab1:checked ~ #content1,
+            #tab2:checked ~ #content2,
+            #tab3:checked ~ #content3,
+            #tab4:checked ~ #content4,
+            #tab5:checked ~ #content5,
+            #tab6:checked ~ #content6 {
+                display: block;
+            }
+
+            @media screen and (max-width: 870px) {
+                #row {
+                    display: inline-block;
+                    float: right;
+                }
+            }
+
+            @media screen and (max-width: 670px) {
+                label {
+                    font-size: 0;
+                }
+
+                label:before {
+                    margin: 0;
+                    font-size: 18px;
+                }
+            }
+
+            @media screen and (max-width: 400px) {
+                label {
+                    padding: 15px;
+                }
+            }
+
+            button.heart { background:none; border:none; font-size: 110%; float:right; padding-top:9px; }
+            a.signout { font-size: 120%; float:right; padding-top:6px; padding-right:10px }
+
+            .vSep {
+                float:right;
+                padding-top:8px;
+                padding-left:3px;
+                padding-right:3px;
+                color:rgb(213,213,213);
+            }
+        </style>
+
+        <script>
+            ;(function($){
+                $(document).ready(function() {
+                    helpTooltip();
+
+                    // Hide the donate bar if the user is not logged in.
+                    // Investr is shutting down: Now that we are shutting down just show the shutting down
+                    // message. Dont encourage the users to sign in.
+                    // $('#headerBarDonate').hide();
+                    $('#headerBar').hide();
+                    $('#headerBarDonate').show();
+                    if (isUserLoggedIn()) {
+                        $('#headerBar').hide();
+
+                        var userEmail = localStorage.getItem("InvestrUser");
+                        if (userEmail.indexOf("@")) {
+                            document.getElementById('sign-in').innerHTML = "<div class=\"userNameCircle\">".concat(userEmail.substr(0, 1).toUpperCase()).concat("</div>");
+                        }
+                        else {
+                            document.getElementById('sign-in').innerHTML = "Sign-In";
+                            googleSignInQtip();
+                        }
+
+                        $.post("user.php",
+                            {
+                                "callFunc": "getNoticeCount",
+                                "userEmail": localStorage.getItem("InvestrUser")
+                            },
+                            function (response) {
+                                if (response > 0)
+                                    document.getElementById("bell").style.color = "red";
+                            }
+                        );
+
+                        var loveCount;
+                        $.post("user.php",
+                            {
+                                "callFunc": "getPrefs",
+                                "userEmail": localStorage.getItem("InvestrUser"),
+                                "prefName": "LOVE"
+                            },
+                            function (response) {
+                                response = response.replace(/^\s+|\s+$/g, ""); // Remove the trailing new line
+
+                                if (response.length === 0 || response === "NaN")
+                                    loveCount = 0; // User clicking for the first time
+                                else
+                                    loveCount = parseInt(response);
+
+                                if (loveCount > 0 && !(loveCount % 2))
+                                    document.getElementById("heart").style.color = "red";
+                            }
+                        );
+
+                        $(".heart").click(function() {
+                            loveCount = loveCount + 1;
+                            $.post("user.php",
+                                {
+                                    "callFunc": "setPrefs",
+                                    "userEmail": localStorage.getItem("InvestrUser"),
+                                    "prefName": "LOVE",
+                                    "prefs": loveCount.toString()
+                                },
+                                function (response) {
+                                    if (loveCount % 2)
+                                        document.getElementById("heart").style.color = "black";
+                                    else
+                                        document.getElementById("heart").style.color = "red";
+                                }
+                            );
+                        });
+                    }
+                    else {
+                        document.getElementById('sign-in').innerHTML = "Sign-In";
+                        googleSignInQtip();
+                    }
+
+                    // We are lazy loading the tabs when clicked, but that works only if window is resized.
+                    // So we need to simulate window resize.
+                    $("input[type='radio']").click(function(){
+                        $(window).trigger('resize');
+                    });
+                });
+            })(jQuery);
+
+        </script>
+
+    </head>
+
+    <body>
+        <div id="headerBar"><a href="signin.html" target="_blank">Sign-In To Access 675+ Companies</a></div>
+        <div id="headerBarDonate"><a href="thankyou.html" target="_blank">InvestR is shutting down!</a></div>
+        <main>
+            <input id="tab1" type="radio" name="tabs" checked>
+            <label for="tab1"><span id="optimized">Optimized</span></label>
+
+            <input id="tab2" type="radio" name="tabs">
+            <label for="tab2"><span id="personal">Personal</span></label>
+
+            <input id="tab3" type="radio" name="tabs">
+            <label for="tab3"><span id="gems">Gems!</span></label>
+
+            <input id="tab4" type="radio" name="tabs">
+            <label for="tab4"><span id="sectors">Sectors</span></label>
+
+            <input id="tab5" type="radio" name="tabs">
+            <label for="tab5"><span id="all">All</span></label>
+
+            <input id="tab6" type="radio" name="tabs">
+            <label for="tab6"><span id="watchlist">Watchlist</span></label>
+
+            <span id="row">
+                <a class="signout" href="#" onClick="onSignOut();"><i  class="fa fa-sign-out" aria-hidden="true"></i></a>
+                <div class="vSep">|</div>
+                <div style="float:right; padding-top:10px;" id="sign-in"></div>
+                <div class="vSep">|</div>
+                <button style="padding:0px; padding-top:9px;" id="heart" class="heart"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                <div class="vSep">|</div>
+                <a href="mailto:yourmailid@yourmailprovider.com?Subject=Feedback" target="_blank"><i style="float:right; font-size:110%; padding-top:10px;" class="fa fa-commenting"  aria-hidden="true"></i></a>
+                <div class="vSep">|</div>
+                <a href="settings.html"><i id="cogs" style="float:right; padding-top:12px;" class="fa fa-cogs" aria-hidden="true"></i></a>
+                <div class="vSep">|</div>
+                <i id="bell" style="float:right; padding-top:12px;" class="fa fa-bell" aria-hidden="true"></i>
+                <div class="vSep">|</div>
+                <a href="https://www.amazon.in/gp/product/B00K6E6WFM/" target="_blank"><i id="gift" style="float:right; font-size:120%; padding-top:10px;" class="fa fa-gift" aria-hidden="true"></i></a>
+                <!-- Enable this to add one more menu item
+                <div class="vSep">|</div>
+                <a href="replies.html" target="_blank"><i id="reply" style="float:right; font-size:100%; padding-top:10px;" class="fa fa-reply-all" aria-hidden="true"></i></a>
+                -->
+            </span>
+
+            <div style="float:right; display:none; width:100px;" class="g-signin2" data-onsuccess="onSignIn"></div>
+
+            <section id="content1">
+                <div class="iFrame"><iframe data-src="opt.html" width="100%" style="height: 90vh;" frameBorder="0"></iframe></div>
+            </section>
+
+            <section id="content2">
+                <div class="iFrame"><iframe data-src="user.html" width="100%" style="height: 90vh;" frameBorder="0"></iframe></div>
+            </section>
+
+            <section id="content3">
+                <div class="iFrame"><iframe data-src="gems.html" width="100%" style="height: 90vh;" frameBorder="0"></iframe></div>
+            </section>
+
+            <section id="content4">
+                <div class="iFrame"><iframe data-src="sectorBubble.html" width="100%" style="height: 90vh;" frameBorder="0"></iframe></div>
+            </section>
+
+            <section id="content5">
+                <div class="iFrame"><iframe data-src="allscatter.html" width="100%" style="height: 90vh;" frameBorder="0"></iframe></div>
+            </section>
+
+            <section id="content6">
+                <div class="iFrame"><iframe data-src="watchlist.html" width="100%" style="height: 90vh;" frameBorder="0"></iframe></div>
+            </section>
+        </main>
+    </body>
+</html>

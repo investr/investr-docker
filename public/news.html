@@ -1,0 +1,332 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="theme-color" content="#91A500"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="HandheldFriendly" content="true"/>
+
+<title>Investr.co.in News</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="investr.css">
+<link rel="stylesheet" type="text/css" href="nowcards.css">
+
+</head>
+<body>
+<div id="envelop">
+    <section class="card">
+        <h1>News</h1>
+    </section>
+    <section class="card">
+        <h2>29-Nov-2017</h2>
+            <ul>
+                <li>Company specifit chart now show quarter and year names.</li>
+                <li>Moved charts and other pages to Google Now Card based look and feel.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>27-Aug-2017</h2>
+            <ul>
+                <li>New Feature: Added tag /retonass that will filter companies based on the Return on Asset tolerance set in the Settings page.</li>
+                <li>Added more than 100 companies. InvestR now tracks 690+ companies!</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>26-Jul-2017</h2>
+            <ul>
+                <li>Re-arranged the company fundamental charts to make them more clearer.</li>
+                <li>Q1 results have started trickling in. Search for "Jun 17" to search for companies that have come out with Q1 results.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>10-Jul-2017</h2>
+            <ul>
+                <li>Users can see their InvestR usage on the Settings page</li>
+                <li>Q1 results have started trickling in. Search for "Jun 17" to search for companies that have come out with Q1 results.</li>
+                <li>We have started collecting volume data (BSE + NSE) for the equities that InvestR tracks. It will take a month to collect meaningful amount of data.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>12-May-2017</h2>
+            <ul>
+                <li>New Feature: Now We calculate the fair price of a company based on average sector valuations.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>2-May-2017</h2>
+            <ul>
+                <li>New Feature: Added /contra search tag for contrarian investments. A contrarian investment is in a company where the fundamentals of the company are good but the stock prices is beaten down (is in a down trend, stock price is below its 200 DMA).</li>
+                <li>New Feature: Added the "down arrow" icon to signify companies that are trading below their 200 DMA.
+            </ul>
+    </section>
+    <section class="card">
+        <h2>23-April-2017</h2>
+            <ul>
+                <li>Updated the contact page to expose my portfolio performance dashboard.</li>
+                <li>Q4 result update.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>28-March-2017</h2>
+            <ul>
+                <li>New Feature: Hovering over the <i id="clock" class="fa fa-clock-o" aria-hidden="true"></i> besides the Price column header will tell when the prices were updated last and when is the next scheduled price update.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>23-March-2017</h2>
+            <ul>
+                <li>New Feature: Add Delete localStorage Data button in Settings page. This can be used by the users to reset their data. Data stored on the server will not be affected.</li>
+                <li>Change the default weights in the Personal Tab to Growth. That way first time visitors to the site will see the Growth weighted scores on the personal tab. This score can be changed using the Settings page.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>21-March-2017</h2>
+            <ul>
+                <li>New Feature: Based on the <a href="https://goo.gl/forms/wLnGFnJxgNu8uYjb2">survey feedback</a> We observed many people were either not using the search tags or not using them to their full potential. So We have exposed the most powerful tag in a separate tab named: Gems! Stocks listed in the Gems tab have good fundamentals, resonable valuations and are off their recent highs. If you consider buying these stocks then you should buy them <b>slowly over a period of time</b>, till they are listed in the Gems tab. Disclaimer: We am investing in the "Gems" at my own risk and you should invest in "Gems" at your own risk too!</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>10-March-2017</h2>
+            <ul>
+                <li>New Feature: We have added two new buttons to the Watchlist page.
+                <ul>
+                    <li> Compare Watchlist: Compares companies in your watchlist with each other on various parameters. It will show you at one glance which companies are better than average and which ones are worse than average.</li>
+                    <li> Compare Any 2: This feature will compare any 2 selected companies head-to-head. We created this feature to see the information about 2 companies side by side but then augmented it by giving them points and displaying the better company!</li>
+                </ul>
+                Both these features require that the user is logged-in and has companies in their watchlist.
+                </li>
+                <li>We am currenting running a <a href="https://goo.gl/forms/wLnGFnJxgNu8uYjb2">5 question survey</a> to know how people use InvestR so that We can make it better. We would request you to take a minute of your time and please give me feedback.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>21-February-2017</h2>
+            <ul>
+                <li>New Feature: During the result season, it is possible that even after all our due diligence, few of our companies don't come out with better results. Either the growth falls or the margins dip. During other times it is possible that the stock of our well performing company becomes overvalued and we would like to book profits in it. In such situations sometimes we might be interested in better opportunities. We have tried to ease this search with "Replace Company" feature to InvestR. Upon hovering over the <i class="fa fa-random" aria-hidden="true"></i> icon one can see companies that are better than the selected company wrt the following parameters:
+                <ul>
+                    <li>Quarterly YoY growth of TL, BL and EPS</li>
+                    <li>Yearly TTM growth of TL, BL and EPS</li>
+                    <li>Better profit margins</li>
+                    <li>Higher dividend yield</li>
+                    <li>Lower PE</li>
+                </ul>
+                These values also have a 20% tolerance range.<br>
+                It goes without saying that, one needs to analyze the companies returned as "better" for consistency, valuation amongst peers and any other current news flow about the sector and the company before making any final decision.<br>
+                Feedback is welcome, as always. And thank you for supporting InvestR!</li>
+
+                <li>96% of Q3 earnings have been updated.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>5-February-2017</h2>
+            <ul>
+                <li>New Feature: Added "/sync" search tag. Using this tag, you can search for companies whose topline growth, bottom line growth and EPS growths are in sync. The tolerance for this can be set in the settings page.</li>
+                <li>Q3 earnings are being updated. Painful job.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>15-January-2017</h2>
+            <ul>
+                <li>Received my first Amazong gift card, thanking me for my work on InvestR! Thank you!</li>
+                <li>Q3 earning are being updated. Search for "Dec 16" to filter companies whose Q3 earnings are out.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>21-November-2016</h2>
+            <ul>
+                <li>New Feature: Added historical PE to the company's chart page along side historical score and normalized price.</li>
+                <li>Q2 earning are also being updated. Search for "Sep 16" to filter companies whose Q2 earnings are out.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>8-November-2016</h2>
+            <ul>
+                <li>New Feature: Added Peer comparision. You can check the performance of the company wrt its peer by clicking on the group icon next to the company's name.</li>
+                <li>Q2 earning are also being updated. Search for "Sep 16" to filter companies whose Q2 earnings are out.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>6-November-2016</h2>
+            <ul>
+                <li>Migrated my EC2 instance from Oregon to Mumbai. This should bring performace improvement for users in India.</li>
+                <li>Q2 earning are also being updated. Search for "Sep 16" to filter companies whose Q2 earnings are out.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>20-October-2016</h2>
+            <ul>
+                <li>Added the Amazon Gift Card icon and link to Amazon Gift Card.</li>
+                <li>Updated the privacy policy to reflect addition of the new link to Amazon.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>19-October-2016</h2>
+            <ul>
+                <li>New Chart: On the company specific chart page, We now show the QoQ, YoY, TTM growth charts for earnings, profit, interest, margins and EPS.</li>
+                <li>Q2 earning are also being updated. Search for "Sep 16" to filter companies whose Q2 earnings are out.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>17-October-2016</h2>
+            <ul>
+                <li>High-Low PE Range: As you are aware companies trade in their own PE band based on how the market values the sector of the company and the company itself. If we observe a company over multiple years we can see that there is an average-approximate lower and higher band for every company and the company's PE stays within this band for most of the time. When the PE of the company falls below the lower end, it comes up again rather quickly and when the PE of the company rises above the higher end, it comes down again rather quickly. Hence it makes sense to track these higher and lower bands to see how the company is currently valued. It is also nice to know the High-PE/Low-PE ratio. Companies with a ratio close to 1 can be considered more consistent valuation-wise. We created a histogram and found 1.5 to be a good boundary for consistency. Which means that companies for which the ratio is between 1 and 1.5 can be considered consistent. All this information is available in the "Analysis" tool tip and on the charts page. Of course, when a stock gets re-rated based on its performance the High/Low PEs ranges will not be valid and time needs to be given to see of the stocks settles down in the new range and creates new High/Low PE rages.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>30-September-2016</h2>
+            <ul>
+                <li>Detailed charts page of the company now shows historical score timeline. Note: As the score is a combination of fundamentals and valuations, in the short term, a fall in stock price might increase the score a bit (couple of points) as the valuations become cheaper and vice-versa. But big changes to score will occur after the quarterly results as a change to the fundamentals of a company has a stronger effect on score and over a period of an year or so, price should move in sync with the score.</li>
+                <li>Because of the geo-political tension in the sub-continent, yesterday (29th) was crazy day for my portfolio. We took that fall as an opprotunity and bought: Edelweiss, Menon Bearings and Sanofi.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>26-September-2016</h2>
+            <ul>
+                <li>Added a whole bunch of fine grained sectors/industries to the Sectors page. With this you can quickly compare a company with its peers in the same sector/industry.</li>
+                <li>Slowly accumulating: Sanofi India, JM Financials</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>16-September-2016</h2>
+            <ul>
+                <li>Added support to search/filter based on market capitalization: /largecap, /midcap, /smallcap.</li>
+                <li>On going: Q1 result update. Updated 603/637 companies.</li>
+                <li>Slowly accumulating: Panasonic Carbon, Sanofi India and HCL Tech.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>14-September-2016</h2>
+            <ul>
+                <li>Slowly accumulating: Panasonic Carbon, Sanofi India and Veljon Denison.</li>
+                <li>Number of companies tracked increases to 636</li>
+                <li>On going: Q1 result update. Updated 570/636 companies.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>8-September-2016</h2>
+            <ul>
+                <li>Exposed tag to mine for companies with a diamond next to it: /gems</li>
+                <li>On going: Q1 result update. Updated 531/624 companies.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>5-September-2016</h2>
+            <ul>
+                <li>Added "Packaging" sector to the bubble chart on Sector tab.</li>
+                <li>Wrote up Privacy Policy.</li>
+                <li>Wrote up Contact.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>3-September-2016</h2>
+            <ul>
+                <li>Update Help and About files with icons and added help on "tlgrowth" search tag.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>2-September-2016</h2>
+            <ul>
+                <li>Sold: Little bit of Sintex @ 76.15</li>
+                <li>Bought: Little bit of HCL Tech @ 780; JM Financial @ 66.25; Srikalahasti Pipes @ 289</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>1-September-2016</h2>
+            <ul>
+                <li>Diamond Icon: Implemented feature that shows a <i class="fa fa-diamond" aria-hidden="true"></i> if most of the valuations and fundamental parameters of a company are looking great. Of course, it does not mean that you can blindly go ahead and buy it. Diamond icon means that most things are looking good but you need to check the media for any adverse news or rabbit out of the hat concerns.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>31-August-2016</h2>
+            <ul>
+                <li>Caution Icon: Implemented feature that shows a <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> if the company has shaky fundamentals. Some companies that suddenly show a profit after many quarters of losses might get a good score but the are not necessarily good buying opportunities. Users are advised to be cautious while investing in companies with the caution icon.</li>
+                <li>Optimized tab is now the default tab. This change was made because most visitors were using the default tab without making personal setting changes. If you are not going to personalize the score then it is better to use the Optimized tab.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>29-August-2016</h2>
+            <ul>
+                <li>YoY quarterly TL Growth: Company's detailed chart and Analysis tool-tip now shows the YoY quarterly top-line growth of the company for the last recorded quarter.</li>
+                <li>/tlgrowth Search Tag: You can now search for companies that have reported more than 8% YoY quarterly top-line growth in their last reported quarter. You can customize this number in the Settings.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>28-August-2016</h2>
+            <ul>
+                <li>Setting Icon: Moved the <i class="fa fa-cogs" aria-hidden="true"></i> icon out of the Personal tab. It now sits with the rest of the menu on the right side.</li>
+                <li>Bell Tool-tip: Tool tip on the <i class="fa fa-bell" aria-hidden="true"></i> is now auto displayed for unsigned-in users.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>25-August-2016</h2>
+            <ul>
+                <li>Updated Help and About pages with new features.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>22-August-2016</h2>
+            <ul>
+                <li>EMail for Stocks Below 30 DMA: Signed In users who have added stocks to watchlist can now enable email notification service in the Settings page. When enabled, users will get twice a day emails when the stocks in their watchlist trade below their 30 DMA.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>14-August-2016</h2>
+            <ul>
+                <li>Granular Sectors: Sector chart now has a more granular sector choice.</li>
+                <li>Average values are now displayed in the Y Axis for sector charts.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>13-August-2016</h2>
+            <ul>
+                <li>Code refactoring.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>11-August-2016</h2>
+            <ul>
+                <li>Reduce width of the input fields in settings.html</li>
+                <li>/interest and /margin: Added support for searching with /interest and /margin search tags. Using these search tags you can find companies will finance cost less than 4% and profit margins greater than 8%. These values can be changed in the Settings page.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>5-August-2016</h2>
+            <ul>
+                <li>Added feature to send notifications to logged in users.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>4-August-2016</h2>
+            <ul>
+                <li>Tweaked Optimized rating weightages.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>28-July-2016</h2>
+            <ul>
+                <li>Bug fixes, code cleanup and refactoring.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>21-July-2016</h2>
+            <ul>
+                <li>Added Sign In support.</li>
+                <li>Individual tab are now lazy loaded.</li>
+            </ul>
+    </section>
+    <section class="card">
+        <h2>To Do</h2>
+            <ul>
+                <li>Null</li>
+            </ul>
+    </section>
+</div>
+<div id="footer"></div>
+</body>
+</html>

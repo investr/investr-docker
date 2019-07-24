@@ -1,0 +1,163 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Investr.co.in: Optimized Score</title>
+
+<meta name="theme-color" content="#DB1D3B"/>
+<meta content="True" name="HandheldFriendly"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta name="viewport" content="width=device-width"/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.colVis.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css">
+<link rel="stylesheet" type="text/css" href="investr.css">
+
+<script>
+
+$(document).ready(function() {
+    var table = workHorse("opt"); // Note: Watchlist uses Optimized settings
+
+    // Set default search criteria to "watchlist" so that we see the watchlisted companies
+    table.search('/watchlist').draw();
+
+    // Enable selection on datatables rows
+    $('#example tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+    });
+
+    // Get the selected rows while adding to watch list.
+    $('#saveWatchlist').click( function () {
+        var newIDs = $.map(table.rows('.selected').data(), function (item) {
+            return item.ID;
+        });
+
+        if (isUserLoggedIn()) {
+            // Duplicates will be handled by the DB as we have a unique constraint there
+            $.post("user.php",
+                {
+                    "callFunc": "setWatchlist",
+                    "userEmail": localStorage.getItem("InvestrUser"),
+                    "stockIds": JSON.stringify(newIDs)
+                },
+                function (response) {
+                    location.href = "watchlist.html";
+                }
+            );
+        } else {
+            // Get the existing watch list and append the new list to it.
+            var lsWatchList = localStorage.getItem("InvestrWatchlist");
+            if (lsWatchList === null){
+                localStorage.setItem("InvestrWatchlist", JSON.stringify(newIDs));
+            } else {
+                existingIDs = JSON.parse(lsWatchList);
+                watchListIDs = existingIDs.concat(newIDs);
+                localStorage.setItem("InvestrWatchlist", JSON.stringify(uniqueArray(watchListIDs)));
+            }
+            location.href = "watchlist.html";
+        }
+    });
+
+    // Remove selected elements from watchlist
+    $('#removeWatchlist').click( function () {
+        var ids = $.map(table.rows('.selected').data(), function (item) {
+            return item.ID;
+        });
+        if (isUserLoggedIn()) {
+            $.post("user.php",
+                {
+                    "callFunc": "deleteFromWatchlist",
+                    "userEmail": localStorage.getItem("InvestrUser"),
+                    "stockIds": JSON.stringify(ids)
+                },
+                function (response) {
+                    location.href = "watchlist.html";
+                }
+            );
+        } else {
+            var watchListIDs = JSON.parse(localStorage.getItem("InvestrWatchlist"));
+            var leftOverIDs = $(watchListIDs).not(ids).get();
+            localStorage.setItem("InvestrWatchlist", JSON.stringify(leftOverIDs));
+
+            location.href = "watchlist.html";
+        }
+    } );
+
+    // Open watchlistchart.html for the user
+    $('#compareWatchlist').click( function () {
+        var encodedId = getEncodedUserId();
+        if (encodedId != undefined && encodedId != "bnVsbA==") {
+            window.open("watchlistchart.html?idCode=" + encodedId, '_blank');
+        }
+        else {
+            alert("Please login to use this feature!");
+        }
+    } );
+
+    // Open compare.html for the user
+    $('#compareAny2').click( function () {
+        var encodedId = getEncodedUserId();
+        if (encodedId != undefined && encodedId != "bnVsbA==") {
+            var compareIds = $.map(table.rows('.selected').data(), function (item) {
+                return item.ID;
+            });
+
+            if (compareIds.length != 2) {
+                alert("Please select 2 companies!");
+            } else {
+                window.open("compare.html?id1=" + compareIds[0] + "&id2=" + compareIds[1], '_blank');
+            }
+        }
+        else {
+            alert("Please login to use this feature!");
+        }
+    } );
+
+    logUserSessions();
+} );
+
+</script>
+</head>
+<body>
+    <table id="example" class="display nowrap" cellspacing="0"  width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NSE</th>
+                <th>BSE</th>
+                <th>Last Qtr</th>
+                <th>Name</th>
+                <th>% Score</th>
+                <th>Price <i id="clock" class="fa fa-clock-o" aria-hidden="true"></i></th>
+                <th>PE</th>
+                <th>PEG</th>
+                <th>Div Yield</th>
+                <th>Valuation Color Band</th>
+                <th>Sector</th>
+                <th>Owned</th>
+            </tr>
+        </thead>
+    </table>
+    <div style="text-align:center">
+        <button id="saveWatchlist">Save To Watchlist</button>
+        <button id="removeWatchlist">Remove from Watchlist</button>
+        <button id="compareWatchlist">Compare Watchlist</button>
+        <button id="compareAny2">Compare Any 2</button>
+    </div>
+<div id="footer"></div>
+</body>
+</html>

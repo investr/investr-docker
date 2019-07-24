@@ -1,0 +1,146 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="True" name="HandheldFriendly"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="viewport" content="width=device-width"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+        <script> google.charts.load('current', {'packages':['corechart']}); </script>
+
+        <link rel="stylesheet" type="text/css" href="investr.css">
+    </head>
+    <body>
+        <div align="center">
+            <select id="yAxisDDL">
+                <option value="XXX" selected="selected">Select Y Axis</option>
+                <option value="PE">PE</option>
+                <option value="DY">Dividend Yield</option>
+                <option value="PBV">Price To Book</option>
+            </select>
+            <select id="sectorDDL">
+                <option value="XXX" selected="selected">Select a Sector</option>
+                <option value="/AC">AC</option>
+                <option value="/AGRICULTURE">Agriculture</option>
+                <option value="/AIRLINES">Airlines</option>
+                <option value="/ALUMINIUM">Aluminium</option>
+                <option value="/ANCILLARIES">Auto Ancillaries</option>
+                <option value="/AUTO">Auto</option>
+                <option value="/BANK">Bank</option>
+                <option value="/BATTERIES">Batteries</option>
+                <option value="/BEARINGS">Bearings</option>
+                <option value="/CABLES">Cables</option>
+                <option value="/CABLETV">Cable TV</option>
+                <option value="/CARS">Cars</option>
+                <option value="/CASTING">Casting</option>
+                <option value="/CEMENT">Cement</option>
+                <option value="/CERAMICS">Ceramics</option>
+                <option value="/CHEMICALS">Chemicals</option>
+                <option value="/CIGARETTES">Cigarettes</option>
+                <option value="/COAL">Coal</option>
+                <option value="/COMPRESSORS">Compressors</option>
+                <option value="/COMPUTER">Computer</option>
+                <option value="/CONSTRUCTION">Construction</option>
+                <option value="/CONSUMERGOODS">Consumer Goods</option>
+                <option value="/COPPER">Copper</option>
+                <option value="/COURIERS">Couriers</option>
+                <option value="/DEFENCE">Defence</option>
+                <option value="/DIAMOND">Diamond</option>
+                <option value="/DISCRETIONARY">Discretionary</option>
+                <option value="/DISTRIBUTION">Distribution</option>
+                <option value="/DISTILLERIES">Distilleries</option>
+                <option value="/DTH">DTH</option>
+                <option value="/DYES">Dyes</option>
+                <option value="/EDUCATION">Education</option>
+                <option value="/ELECTRONICS">Electronics</option>
+                <option value="/ENGINES">Engines</option>
+                <option value="/EXPLORATION">Exploration</option>
+                <option value="/ENERGY">Energy</option>
+                <option value="/ENGINEERING">Engineering</option>
+                <option value="/ENTERTAINMENT">Entertainment</option>
+                <option value="/FASTENERS">Fasteners</option>
+                <option value="/FISHING">Fishing</option>
+                <option value="/FOODPROCESSING">Food Processing</option>
+                <option value="/FOOTWEAR">Footwear</option>
+                <option value="/FERTILIZERS">Fertilizers</option>
+                <option value="/FINANCIALS">Financials</option>
+                <option value="/FMCG">FMCG</option>
+                <option value="/GENERATION">Power Generation</option>
+                <option value="/GRANITE">Granite</option>
+                <option value="/GOLD">Gold</option>
+                <option value="/HEALTHCARE">Healthcare</option>
+                <option value="/HEAVYENGINEERING">Heavy Engineering</option>
+                <option value="/HOSPITALS">Hospitals</option>
+                <option value="/HOTELS">Hotels</option>
+                <option value="/HOUSING">Housing</option>
+                <option value="/HOUSINGFINANCE">Housing Finance</option>
+                <option value="/INFRASTRUCTURE">Infrastructure</option>
+                <option value="/INVESTMENTS">Investments</option>
+                <option value="/IT">IT</option>
+                <option value="/JEWELLERY">Jewellery</option>
+                <option value="/LOGISTICS">Logistics</option>
+                <option value="/MEDIA">Media</option>
+                <option value="/METALS">Metals</option>
+                <option value="/MINING">Mining</option>
+                <option value="/MICROFINANCE">Microfinance</option>
+                <option value="/MINERALS">Minerals</option>
+                <option value="/NBFC">NBFC</option>
+                <option value="/NEWS">News</option>
+                <option value="/NEWSPAPER">News Paper</option>
+                <option value="/NIFTY">Nifty</option>
+                <option value="/PACKAGING">Packaging</option>
+                <option value="/PAPER">Paper</option>
+                <option value="/PETROCHEMICALS">Petrochemicals</option>
+                <option value="/PHARMA">Pharma</option>
+                <option value="/PIPES">Pipes</option>
+                <option value="/PLYWOOD">Plywood</option>
+                <option value="/POWER">Power</option>
+                <option value="/PSUBANK">PSU Banks</option>
+                <option value="/PUMPS">Pumps</option>
+                <option value="/PAINTS">Paints</option>
+                <option value="/PLASTICS">Plastics</option>
+                <option value="/PORTS">Ports</option>
+                <option value="/PRINTING">Printing</option>
+                <option value="/PRIVATESECTORBANK">Private Sector Bank</option>
+                <option value="/RADIO">Radio</option>
+                <option value="/RAILWAYS">Railways</option>
+                <option value="/REALESTATE">Real Estate</option>
+                <option value="/REFACTORY">Refactory</option>
+                <option value="/RETAIL">Retail</option>
+                <option value="/RATINGS">Ratings</option>
+                <option value="/ROADS">Roads</option>
+                <option value="/SERVICES">Services</option>
+                <option value="/SHIPPING">Shipping</option>
+                <option value="/SOFTWARE">Software</option>
+                <option value="/STEEL">Steel</option>
+                <option value="/SEEDS">Seeds</option>
+                <option value="/SHEETS">Sheets</option>
+                <option value="/STATIONERY">Stationery</option>
+                <option value="/STRIPS">Strips</option>
+                <option value="/SUGAR">Sugar</option>
+                <option value="/TELECOM">Telecom</option>
+                <option value="/TEXTILE">Textile</option>
+                <option value="/TRACTORS">Tractors</option>
+                <option value="/TRADING">Trading</option>
+                <option value="/TRANSPORTATION">Transportation</option>
+                <option value="/TRANSMISSION">Transmission</option>
+                <option value="/TRAVEL">Travel</option>
+                <option value="/TV">TV</option>
+                <option value="/TYRES">Tyres</option>
+                <option value="/ZINC">Zinc</option>
+            </select>
+            <input type="button" value="Re-Draw Chart" onclick="drawSectorBubbleChart();" id="drawChart"/>
+        </div>
+        <div id="bubble_chart_div" style="width: 1100px; height: 475;" align="center"></div>
+        <h4>
+          <div align="center">Color Axis denotes Interest/Provisions Percentage</div>
+          <div align="center">Bubble size denotes Profit Margins</div>
+        </h4>
+        <div id="footer"></div>
+    </body>
+</html>

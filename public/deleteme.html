@@ -1,0 +1,73 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#237720"/>
+    <meta content="True" name="HandheldFriendly"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <eta name="viewport" content="width=device-width"/>
+    <meta name="description" content="Investr is a stock screener that screens companies based on personalized weighted scores. It also highlights companies that are trading at attractive valuations. Investr also reports whether or not a company's top-line and bottom-line growth is consistent and if a company is trading above or below its 30 day moving average. All this information is supported via beautiful and intuitive charts.">
+    <meta name="google-signin-client_id" content="98035188385-if2hvjojr96255tpuob52frr2eg146h5.apps.googleusercontent.com">
+
+    <title>InvestR.co.in: Stock Screener For Investors Investing In Indian Equities</title>
+
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="investr.css">
+    <script>
+        function onLoad() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init();
+            });
+        }
+
+        function deleteUser() {
+            if (isUserLoggedIn()) {
+                var userEmail = localStorage.getItem("InvestrUser");
+
+                // First Sign out of google
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    $.post("user.php",
+                        {
+                            "callFunc": "deleteUser",
+                            "email": userEmail,
+                        },
+                        function (response) {
+                            alert(response);
+                            localStorage.clear();
+                            location.href = "index.html";
+                        }
+                    );
+                });
+            } else {
+                alert("First Sign-In to delete account!")
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h3>Delete InvestR Account</h3>
+    Click the "Delete User Account" button to delete your account information from the InvestR server.<br>
+    Following things will be deleted:<br>
+    <ul>
+        <li>Google account information: Name, Email and Link to User Image (if any)</li>
+        <li>Preferences stored on the server</li>
+        <li>Watchlist stocks stored on the server</li>
+        <li>Undelivered notifications</li>
+    </ul>
+    NOTE: NO CONFIRMATION WILL BE ASKED UPON CLICKING THE BUTTON BELOW!<br>
+    <i><a href="index.html">We changed my mind. Take me back to InvestR.</a><br></i>
+    <br>
+    <input type="button" value="Delete User Account" onclick="deleteUser();" id="delete"/><br>
+    <br>
+    <i>(If you don't get a goodbye message after pressing delete user account button then force refresh the page and try again.)</i><br>
+
+    <div id="footer"></div>
+</body>
+</html>

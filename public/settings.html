@@ -1,0 +1,598 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Investr.co.in: Settings</title>
+
+<link rel="stylesheet" type="text/css" href="investr.css">
+<link rel="stylesheet" type="text/css" href="nowcards.css">
+<style>
+
+    .show_hide {
+        display:none;
+    }
+
+    input[type="number"] {
+        width: 40px;
+    }
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+<script>
+var EMAIL_WATCHLIST = 1; // Bit flag for watchlist. This should be constant across files
+var EMAIL_NEWSLETTER = 2; // Bit flag for watchlist. This should be constant across files
+
+$(document).ready(function(){
+
+    $(".slidingDiv").hide();
+    $(".show_hide").show();
+
+    $('.show_hide').click(function(){
+        $(".slidingDiv").slideToggle();
+    });
+
+    // First refresh the user's customizations from the DB
+    loadUserCustomizations();
+
+    loadWeights();
+
+    loadValuations();
+
+    loadTolerance();
+
+    loadUserEmail();
+
+    loadHelpTooltip();
+
+    $('#mailWatchlistCB').change(function() {
+        // Get the existing value for InvestrMail and set/unset the bit for watchlist email.
+        // Default to 0 if no stored value exist.
+        var emailUser = 0;
+        if (typeof localStorage.InvestrMail !== 'undefined') {
+            emailUser = localStorage.getItem("InvestrMail");
+        }
+
+        if ($(this).is(":checked"))
+            emailUser |= (1 << EMAIL_WATCHLIST);
+        else
+            emailUser &= ~(1 << EMAIL_WATCHLIST);
+
+        localStorage.setItem("InvestrMail", emailUser);
+
+        if (isUserLoggedIn()) {
+            $.post("user.php",
+                {
+                    "callFunc": "setPrefs",
+                    "userEmail": localStorage.getItem("InvestrUser"),
+                    "prefName": "EMAIL_USER",
+                    "prefs": emailUser
+                },
+                function (response) {
+                    location.href = "index.html";
+                }
+            );
+        } else {
+            location.href = "index.html";
+        }
+    });
+
+    $('#mailNewsletterCB').change(function() {
+        // Get the existing value for InvestrMail and set/unset the bit for newsletter email.
+        // Default to 0 if no stored value exist.
+        var emailUser = 0;
+        if (typeof localStorage.InvestrMail !== 'undefined') {
+            emailUser = localStorage.getItem("InvestrMail");
+        }
+
+        if ($(this).is(":checked"))
+            emailUser |= (1 << EMAIL_NEWSLETTER);
+        else
+            emailUser &= ~(1 << EMAIL_NEWSLETTER);
+
+        localStorage.setItem("InvestrMail", emailUser);
+
+        if (isUserLoggedIn()) {
+            $.post("user.php",
+                {
+                    "callFunc": "setPrefs",
+                    "userEmail": localStorage.getItem("InvestrUser"),
+                    "prefName": "EMAIL_USER",
+                    "prefs": emailUser
+                },
+                function (response) {
+                    location.href = "index.html";
+                }
+            );
+        } else {
+            location.href = "index.html";
+        }
+    });
+
+
+    $('#helpTooltipCB').change(function() {
+        var helpTooltipChk = null;
+        if ($(this).is(":checked"))
+            helpTooltipChk = "enable";
+        else
+            helpTooltipChk = "disable";
+
+        localStorage.setItem("InvestrTooltipHelp", helpTooltipChk);
+
+        if (isUserLoggedIn()) {
+            $.post("user.php",
+                {
+                    "callFunc": "setPrefs",
+                    "userEmail": localStorage.getItem("InvestrUser"),
+                    "prefName": "SHOW_TOOLTIPS",
+                    "prefs": helpTooltipChk
+                },
+                function (response) {
+                    location.href = "index.html";
+                }
+            );
+        } else {
+            location.href = "index.html";
+        }
+    });
+
+    logUserSessions();
+
+    getAccountInfo();
+});
+
+$(function () {
+    $("input[name='presets']").click(function () {
+        if ($("#advanced").is(":checked")) {
+            $(".slidingDiv").show();
+        } else {
+            $(".slidingDiv").hide();
+        }
+    });
+});
+
+function loadWeights() {
+    var userWeights = JSON.parse(localStorage.getItem("InvestrUserWeights"));
+
+    if (userWeights != null) {
+        $('#ira').val(userWeights[0]);
+        $('#irb').val(userWeights[1]);
+        $('#irc').val(userWeights[2]);
+        $('#ird').val(userWeights[3]);
+        $('#ire').val(userWeights[4]);
+        $('#irf').val(userWeights[5]);
+        $('#irg').val(userWeights[6]);
+        $('#irh').val(userWeights[7]);
+        $('#iri').val(userWeights[8]);
+        $('#irj').val(userWeights[9]);
+        $('#irk').val(userWeights[10]);
+        $('#irl').val(userWeights[13]);
+        $('#irm').val(userWeights[14]);
+        $('#irn').val(userWeights[15]);
+        $('#iro').val(userWeights[16]);
+    }
+
+    selected_preset = localStorage.radio_presets;
+    $("input[name=presets][value=" + selected_preset + "]").prop('checked', true);
+}
+
+function loadValuations() {
+    var userValuations = JSON.parse(localStorage.getItem("InvestrUserValuations"));
+
+    $('#irp').val(userValuations[0]);
+    $('#irq').val(userValuations[1]);
+    $('#irr').val(userValuations[3]);
+    $('#irs').val(userValuations[4]);
+    $('#irt').val(userValuations[5]);
+    $('#iru').val(userValuations[6]);
+    $('#irv').val(userValuations[7]);
+    $('#irw').val(userValuations[8]);
+}
+
+function loadTolerance() {
+    var userTolerance = JSON.parse(localStorage.getItem("InvestrUserTolerance"));
+
+    $('#tlTol').val(userTolerance[1]);
+    $('#blTol').val(userTolerance[3]);
+    $('#irx').val(userTolerance[4]);
+    $('#iry').val(userTolerance[5]);
+    $('#irz1').val(userTolerance[6]);
+    $('#irz2').val(userTolerance[7]);
+    $('#irz3').val(userTolerance[8]);
+    $('#irz4').val(userTolerance[9]);
+    $('#scrConTol').val(userTolerance[10]);
+
+}
+
+function loadUserEmail() {
+    var emailWatchlist = "disable";
+    var emailNewsletter = "disable";
+    if (typeof localStorage.InvestrMail !== 'undefined') {
+        // Get the preference and check if the watchlist bit is set
+        var userEmail = localStorage.getItem("InvestrMail");
+
+        if ((userEmail & (1 << EMAIL_WATCHLIST)) > 0)
+            emailWatchlist = "enable";
+
+        if ((userEmail & (1 << EMAIL_NEWSLETTER)) > 0)
+            emailNewsletter = "enable";
+    }
+
+    if (emailWatchlist === "enable")
+        $('#mailWatchlistCB').prop('checked', true);
+    else
+        $('#mailWatchlistCB').prop('checked', false);
+
+    if (emailNewsletter === "enable")
+        $('#mailNewsletterCB').prop('checked', true);
+    else
+        $('#mailNewsletterCB').prop('checked', false);
+}
+
+function loadHelpTooltip() {
+    var helpToolTip = "enable";
+    if (typeof localStorage.InvestrTooltipHelp !== 'undefined') {
+        helpToolTip = localStorage.getItem("InvestrTooltipHelp");
+    }
+    if (helpToolTip === "enable")
+        $('#helpTooltipCB').prop('checked', true);
+    else
+        $('#helpTooltipCB').prop('checked', false);
+}
+
+function saveWeights() {
+    var presets = $('input[name="presets"]:checked').val();
+    var userWeights = null;
+
+    if (presets.localeCompare("growth") == 0) {
+        userWeights = [5,3,4,    5,3,4,    4,2,3,   1,1,    0,0,    1,1,1,1];
+    } else if (presets.localeCompare("value") == 0) {
+        userWeights = [2,1,2,    2,1,2,    3,2,3,   5,5,    0,0,    5,3,1,1];
+    } else if (presets.localeCompare("dividend") == 0) {
+        userWeights = [0.25,0.25,0.25,    0.25,0.25,0.25,    0.25,0.25,0.25,   5,0.25,    0,0,    5,5,5,0.75];
+    } else {
+        userWeights = [$('#ira').val(), $('#irb').val(), $('#irc').val(),
+                       $('#ird').val(), $('#ire').val(), $('#irf').val(),
+                       $('#irg').val(), $('#irh').val(), $('#iri').val(),
+                       $('#irj').val(), $('#irk').val(), 0, 0,
+                       $('#irl').val(), $('#irm').val(), $('#irn').val(), $('#iro').val()];
+    }
+    localStorage.setItem("InvestrUserWeights", JSON.stringify(userWeights));
+    localStorage.setItem("radio_presets", presets);
+
+    if (isUserLoggedIn()) {
+        $.post("user.php",
+            {
+                "callFunc": "setPrefs",
+                "userEmail": localStorage.getItem("InvestrUser"),
+                "prefName": "WEIGHT_PRESET",
+                "prefs": presets
+            },
+            function (response) {
+                $.post("user.php",
+                    {
+                        "callFunc": "setPrefs",
+                        "userEmail": localStorage.getItem("InvestrUser"),
+                        "prefName": "WEIGHTS",
+                        "prefs": JSON.stringify(userWeights)
+                    },
+                    function (response) {
+                        location.href = "index.html";
+                    }
+                );
+            }
+        );
+    } else {
+        location.href = "index.html";
+    }
+}
+
+function saveValuations() {
+
+    var userValuations = [$('#irp').val(),
+                          $('#irq').val(), $('#irp').val(),
+                          $('#irr').val(), $('#irs').val(),
+                          $('#irt').val(), $('#iru').val(),
+                          $('#irv').val(), $('#irw').val()];
+
+    // Save prefs to localStorage first and then if user is logged in to the database.
+    localStorage.setItem("InvestrUserValuations", JSON.stringify(userValuations));
+
+    if (isUserLoggedIn()) {
+        $.post("user.php",
+            {
+                "callFunc": "setPrefs",
+                "userEmail": localStorage.getItem("InvestrUser"),
+                "prefName": "VALUATIONS",
+                "prefs": JSON.stringify(userValuations)
+            },
+            function (response) {
+                location.href = "index.html";
+            }
+        );
+    } else {
+        location.href = "index.html";
+    }
+}
+
+function deleteLocalStorage() {
+
+    localStorage.clear();
+
+    location.href = "index.html";
+}
+
+function saveTolerance() {
+    var userTolerance = [0, $('#tlTol').val(), 0, $('#blTol').val(), $('#irx').val(), $('#iry').val(), $('#irz1').val(), $('#irz2').val(), $('#irz3').val(), $('#irz4').val(), $('#scrConTol').val()];
+
+    // Save prefs to localStorage first and then if user is logged in to the database.
+    localStorage.setItem("InvestrUserTolerance", JSON.stringify(userTolerance));
+
+    if (isUserLoggedIn()) {
+        $.post("user.php",
+            {
+                "callFunc": "setPrefs",
+                "userEmail": localStorage.getItem("InvestrUser"),
+                "prefName": "TOLERANCE",
+                "prefs": JSON.stringify(userTolerance)
+            },
+            function (response) {
+                location.href = "index.html";
+            }
+        );
+    } else {
+        location.href = "index.html";
+    }
+}
+
+function activateSubscription() {
+    document.getElementById('membershipStatus').innerHTML = "PAID";
+    document.getElementById('paidButton').innerHTML = "<i class='inLineHelp'>Payment verification pending. Generally takes a day!</i>";
+    $.post("user.php",
+        {
+            "callFunc": "setPrefs",
+            "userEmail": localStorage.getItem("InvestrUser"),
+            "prefName": "DONATION",
+            "prefs": "PAID"
+        },
+        function (response) {
+            location.href = "index.html";
+        }
+    );
+}
+
+function resetValuations() {
+
+    $('#irp').val(70);
+    $('#irq').val(54);
+    $('#irr').val(0);
+    $('#irs').val(20);
+    $('#irt').val(0);
+    $('#iru').val(1);
+    $('#irv').val(1);
+    $('#irw').val(30);
+}
+
+</script>
+
+</head>
+<body>
+    <section class="card">
+        <h1><center>Settings</center></h1>
+    </section>
+    <section class="card">
+        <form name="settings">
+            <fieldset style="border:1px solid white;">
+                <table>
+                    <tr>
+                        <td class="settingHeader"><h4>Looking For</h4></td>
+                        <td></td>
+                        <td><br>
+                            <input type = "radio" name = "presets" id = "growth" value = "growth" checked = "checked"/>
+                            <label for = "growth">Growth <i class="inLineHelp">(Fast Growing)</i></label><br>
+                            <input type = "radio" name = "presets" id = "value" value = "value" />
+                            <label for = "value">Value <i class="inLineHelp">(Reasonable Valuations)</i></label><br>
+                            <input type = "radio" name = "presets" id = "dividend" value = "dividend" />
+                            <label for = "dividend">Fixed Income <i class="inLineHelp">(Higher Dividend)</i></label><br>
+                            <input type = "radio" name = "presets" id = "advanced" value = "advanced" />
+                            <label for = "advanced">Show Advanced Options <i class="inLineHelp">(Full control)</i></label><br><br>
+                            <a href="#" class="show_hide"><u>Advanced Options:</u></a>
+                                <div class="slidingDiv">
+                                <br>
+                                <label>Income (YoY Growth):</label>
+                                <input type="number" min="0" max="5" step="0.25" id="ira"/>
+                                <br>
+                                <label>Income (QoQ Growth):</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="irb"/>
+                                <br>
+                                <label>Income (Yearly Growth):</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="irc"/>
+                                <br>
+                                <label>Profits (YoY Growth):</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="ird"/>
+                                <br>
+                                <label>Profits (QoQ Growth):</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="ire"/>
+                                <br>
+                                <label>Profits (Yearly Growth):</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="irf"/>
+                                <br>
+                                <label>EPS (YoY Growth):</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="irg"/>
+                                <br>
+                                <label>EPS (QoQ Growth):</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="irh"/>
+                                <br>
+                                <label>EPS (Yearly Growth):</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="iri"/>
+                                <br>
+                                <label>Margins Percent:</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="irj"/>
+                                <br>
+                                <label>Margins (Yearly Growth):</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="irk"/>
+                                <br>
+                                <label>PE:</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="irl"/>
+                                <br>
+                                <label>Dividend Yield:</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="irm"/>
+                                <br>
+                                <label>Dividend Growth:</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="irn"/>
+                                <br>
+                                <label>Book Value Growth:</label>
+                                <input type="number" min="0" max="5" step="0.25"  id="iro"/>
+                                <br>
+                                </div>
+                            <br><br>
+                            <input type="button" value="Re-Calculate Score" onclick="saveWeights();" id="savewts"/><br>
+                            <i class="inLineHelp">Changes reflect only in Personal tab</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="settingHeader"><h4>Green/Blue Band</h4></td>
+                        <td></td>
+                        <td><br>
+                            <label>Green Band (Lower End):</label>
+                            <input type="number" min="0" max="90" step="0.01"  id="irp"/>
+                            <i class="inLineHelp">(/green or /all)</i>
+                            <br>
+                            <label>Blue Band (Lower End):</label>
+                            <input type="number" min="0" max="90" step="0.01"  id="irq"/>
+                            <i class="inLineHelp">(/blue or /all)</i>
+                            <br>
+                            <label>PE (Lower End):</label>
+                            <input type="number" min="0" max="100" step="0.01"  id="irr"/>
+                            <br>
+                            <label>PE (Higher End):</label>
+                            <input type="number" min="0" max="100" step="0.01"  id="irs"/>
+                            <i class="inLineHelp">(/pee)</i>
+                            <br>
+                            <label>PEG (Lower End):</label>
+                            <input type="number" min="0" max="100" step="0.01"  id="irt"/>
+                            <br>
+                            <label>PEG (Higher End):</label>
+                            <input type="number" min="0" max="100" step="0.01"  id="iru"/>
+                            <i class="inLineHelp">(/peg)</i>
+                            <br>
+                            <label>Dividend Yield (Lower End):</label>
+                            <input type="number" min="0" max="100" step="0.01"  id="irv"/>
+                            <br>
+                            <label>Dividend Yield (Higher End):</label>
+                            <input type="number" min="0" max="100" step="0.01"  id="irw"/>
+                            <i class="inLineHelp">(/divyld)</i>
+                            <br>
+                            <input type="button" value="Reset To Defaults" onclick="resetValuations();" id="resetvalue"/>
+                            <input type="button" value="Save Valuations" onclick="saveValuations();" id="savevalue"/><br>
+                            <i class="inLineHelp">Changes reflect in Optimized and Personal tabs.<br>
+                            When values for PEG and Dividend Yield are 0, we enter "auto mode". In auto mode, companies with PEG less than Dividend Yield are automatically selected!</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="settingHeader"><h4>Tolerance</h4></td>
+                        <td></td>
+                        <td><br>
+                            <label>Score Consistency:</label>
+                            <select id="scrConTol">
+                                <option value="XXX" selected="selected">Select Consistency</option>
+                                <option value=3>Only Consistent Ones</option>
+                                <option value=15>Fluctuations Okay</option>
+                                <option value=9999>Okay With Inconsistency</option>
+                            </select>
+                            <i class="inLineHelp">(/scrcon)</i>
+                            <br>
+                            <label>Top-line:</label>
+                            <select id="tlTol">
+                                <option value="XXX" selected="selected">Select Consistency</option>
+                                <option value=15>Only Consistent Ones</option>
+                                <option value=30>Fluctuations Okay</option>
+                                <option value=9999>Okay With Inconsistency</option>
+                            </select>
+                            <i class="inLineHelp">(/consistent)</i>
+                            <br>
+                            <label>Bottom-line:</label>
+                            <select id="blTol">
+                                <option value="XXX" selected="selected">Select Consistency</option>
+                                <option value=20>Only Consistent Ones</option>
+                                <option value=50>Fluctuations Okay</option>
+                                <option value=9999>Okay With Inconsistency</option>
+                            </select>
+                            <i class="inLineHelp">(/consistent)</i>
+                            <br>
+                            <label>Price Above 30 DMA (%):</label>
+                            <input type="number" min="0" max="10" step="1"  id="irx"/>
+                            <i class="inLineHelp">(/price)</i>
+                            <br>
+                            <label>Max Interest Paid (%):</label>
+                            <input type="number" min="0" max="100" step="1"  id="irz1"/>
+                            <i class="inLineHelp">(/interest)</i>
+                            <br>
+                            <label>Min Profit Margin (%):</label>
+                            <input type="number" min="0" max="100" step="1"  id="irz2"/>
+                            <i class="inLineHelp">(/margin)</i>
+                            <br>
+                            <label>Min YoY Qtrly TL Growth (%):</label>
+                            <input type="number" min="0" max="100" step="1"  id="irz3"/>
+                            <i class="inLineHelp">(/tlgrowth)</i>
+                            <br>
+                            <label>BL in sync with TL (%):</label>
+                            <input type="number" min="1" max="100" step="1"  id="iry"/>
+                            <i class="inLineHelp">(/sync Tip: Use with /tlgrowth)</i>
+                            <br>
+                            <label>Min ROA for (%):</label>
+                            <input type="number" min="0" max="100" step="1"  id="irz4"/>
+                            <i class="inLineHelp">(/retonass)</i>
+                            <br>
+                            <input type="button" value="Save Tolerance" onclick="saveTolerance();" id="savetol"/><br>
+                            <i class="inLineHelp">Changes reflect in Optimized and Personal tabs</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="settingHeader"><h4>Email</h4></td>
+                        <td></td>
+                        <td><br>
+                            <input type="checkbox" name="tooltip" value="help" id="mailWatchlistCB"/> Email watchlist stocks trading below 30 DMA <i class="inLineHelp">(2 mails / day. 10:15 am and 3:15 am)</i>
+                            <br>
+                            <input type="checkbox" name="tooltip" value="help" id="mailNewsletterCB"/> Newsletter <i class="inLineHelp">(Max 2 mails / month)</i><br>
+                            <i class="inLineHelp">Sign In required</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="settingHeader"><h4>Tooltips</h4></td>
+                        <td></td>
+                        <td><input type="checkbox" name="tooltip" value="help" id="helpTooltipCB"/> Enable/Disable help tooltips
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="settingHeader"><h4>Account</h4></td>
+                        <td></td>
+                        <td><br>
+                            <label>Membership: </label>
+                            <span id="membershipStatus"></span>
+                            <br>
+                            <span id="investrUsage"></span>
+                            <br>
+                            <span id="paidButton"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="settingHeader"><h4>Reset/Delete</h4></td>
+                        <td></td>
+                        <td><br>
+                            <input type="button" value="Reset localStorage Data" onclick="deleteLocalStorage();" id="deletels"/><br><i class="inLineHelp">This will just reset your browser's localStorage data. Data on the server will not be affected.</i><br>
+                            <br>
+                            <a href="deleteme.html" style="color:red;">Delete Account Page</a>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </section>
+    <div id="footer"></div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="theme-color" content="#1B6EBB"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="HandheldFriendly" content="true"/>
+
+<title>Investr.co.in: Help</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="investr.css">
+<link rel="stylesheet" type="text/css" href="nowcards.css">
+
+</head>
+<body>
+<div id="envelop">
+    <section class="card">
+        <h1>Help</h1>
+        <h2>Happy to help you in case you are looking for some!</h2>
+    </section>
+    <section class="card">
+        <h2>Glossary</h2>
+          <ul>
+            <li><b>Name<sub>last quarter</sub>:</b> Name of the company and the latest quarter result that has been included in the computation of the score.</li>
+            <li><b>Score:</b> Percentage score of the company that signifies its last 2 years' fundamentals. Higher the better!</li>
+            <li><b>Price:</b> Last updated stock price based on which the score has been calculated. This is not the live price. Price is updated everyday after the market has closed.</li>
+            <li><b>EPS:</b> Earnings Per Share. Calculated by dividing the net profit by the number of outstanding shares.</li>
+            <li><b>PE:</b> Price to Earnings Ratio. Calculated using the last known price divided by the trailing twelve month EPS (earnings per share). Last quarter for which the EPS has been considered is mentioned besides the name. Lower the better, but needs to be positive!</li>
+            <li><b>PEG:</b> PE to Growth Ratio. Calculated by dividing the PE by its yearly EPS growth. Lower the better, but needs to be positive!</li>
+            <li><b>Div Yield:</b> Dividend Yield. Dividend given by the company expressed as a percentage of the last updated share price. Higher the better!</li>
+            <li><b>Income:</b> Total Income made by the company or the top line of the company (net of excise duty).</li>
+            <li><b>Profits:</b> Net profit made by the company or the bottom line of the company.</li>
+            <li><b>Margins Percent:</b> Net profit of the company expressed as a percentage of the total income.</li>
+            <li><b>Interest/Provisions:</b> Interest paid by the company (towards their debt) expressed as a percentage of the total income. For Banks and NBFCs this number represents the provisions made by the company (against their bad loans) expressed as a percentage of total income.</li>
+            <li><b>Margin Growth:</b> Yearly Growth in the profit margin.</li>
+            <li><b>YoY:</b> Year On Year. E.g. Growth of the company in the 4th quarter of this financial year VS its growth in the fourth quarter of the <b>last</b> financial year.</li>
+            <li><b>QoQ:</b> Quarter on Quarter. E.g. Growth of the company in the 4th quarter of this financial year VS its growth in the third quarter of the <b>same</b> financial year.</li>
+            <li><b>Yearly:</b> Growth of the company over the last 4 quarters (TTM - Trailing Twelve Months) compared to the last financial year.</li>
+            <li><b>TL:</b> Top-line. Total revenue of the company.</li>
+            <li><b>BL:</b> Bottom-line. Total net profit of the company.</li>
+            <li><b>Large Cap:</b> Company with market capitalization greater than 50,000 crores</li>
+            <li><b>Mid Cap:</b> Company with market capitalization between 5,000 and 50,000 crores</li>
+            <li><b>Small Cap:</b> Company with market capitalization less than 5,000 crores</li>
+            <li><b>PE Range:</b> Lower and higher PE range of a company between which a company's PE stays most of the time</li>
+            <li><b>ROA:</b> The return on assets ratio formula is calculated by dividing trailing twelve month net income by total assets. Higher the better.</li>
+            <li><b>Current Ratio:</b> Current ratio is calculated by dividing current assets by current liabilities. Higher the better. Must be greater than 1.</li>
+            <li><b>Working Capital:</b> Working capital is calculated by subtracting the current liabilities from the current assets. Must be greater than 0.</li>
+          </ul>
+    </section>
+    <section class="card">
+        <h2>Predefined Preferences</h2>
+        Investr comes with 3 pre-defined settings: "Growth", "Value" and "Fixed Income". Users who want full control can use the "Advanced Options". These options can be set in the Settings page.
+        <ul>
+          <li><b>Growth:</b> Gives priority to growth by giving more weightage to company's top-line and bottom-line growth. This growth <i>might</i> come at the cost of high PE and high PEG, low Dividend Yield. Growth companies need to constantly keep growing to justify their high valuations. Company's stock price might correct sharply if it misses its top-line or bottom-line target. TIP: In this mode, look out for companies with a "green" band. They are definitely worth further investigation!</li>
+          <li><b>Value:</b> Gives priority to the "value for money" aspect. Value companies trade at reasonably fair  valuations primarily because they are not showing the <i>hot</i> top-line and bottom-line growth.
+          <li><b>Fixed Income:</b> Gives maximum priority to dividend yield and reasonable valuations. If you want fixed income in form of dividend yield then this is the way to go!</li>
+          <li><b>Advanced Settings:</b> If you want full control over all the parameters then this option is for you!</li>
+        </ul>
+    </section>
+    <section class="card">
+        <h2>Search/Filter</h2>
+          The search/filter functionality lies at the heart of Investr. Here are some examples for searching on Investr:
+          <ul>
+          <li>Search for large-cap, mid-cap, small-cap. E.g. "/largecap", "/midcap", "/smallcap"</li>
+          <li>Search for a company's name or its NSE ticker code.</li>
+          <li>Search for companies by the last quarter's result availability. E.g. "Dec 2015" or "Mar 2017"</li>
+          <li>Search for companies by sectors or sub-sectors. E.g. "Auto", "Banks", "NBFC", "PSUBanks", "Tyres", "Infra", "Cement", "FMCG", "Engineering", "Sugar", "Media" etc.</li>
+          <li>Search for companies that are in your watchlist. E.g. "/watchlist"</li>
+          <li>Search for companies with lucrative valuations. E.g. "/green", "/blue", "/all"</li>
+          <li>Search for companies that have shown consistent top-line and bottom-line growth in last 5 quarters. E.g. "/consistent"</li>
+          <li>Search for companies whose PE falls within a given range. E.g. "/pee"</li>
+          <li>Search for companies whose PEG falls within a given range. E.g. "/peg"</li>
+          <li>Search for companies whose dividend yield falls within a given range. E.g. "/divyld"</li>
+          <li>Search for companies with certain minimum Return on Assets. E.g. "/retonass"</li>
+          <li>Search for companies that are currently trading below their 30 day moving average. E.g. "/price"</li>
+          <li>Search for companies with certain minimum profit margin. E.g. "/margin"</li>
+          <li>Search for companies with certain maximum finance cost as percentage of their total revenue. E.g. "/interest"</li>
+          <li>Search for companies with certain minimum year on year quarterly top-line growth. E.g. "/tlgrowth"</li>
+          <li>Search for diamond rated companies. E.g. "/gems"</li>
+          <li>Search for companies with current PE BELOW its "approximate-average-lower-end-PE below which the stock does not stay for a long time". E.g. "/pelow"</li>
+          <li>Search for companies with current PE ABOVE its "approximate-average-higher-end-PE above which the stock does not stay for a long time". E.g. "/pehigh"</li>
+          <li>Search for companies for which the high and low PE does not vary too much. E.g. "/peconsistent"
+          <li>Search for companies whose TL, BL and EPS growths are in sync. E.g. "/sync"
+          </ul>
+          You can also apply multiple search parameters. For example, you can search for "/all /consistent /price" to find all companies with a good score that are consistent and are currently trading below their 30 day moving average.<br>
+          <br>
+          InvestR lets you customize ranges for ALL the search parameters in the Settings page (<i class="fa fa-cogs" aria-hidden="true"></i>). Signed in users will also be able to save the setting on the server so as to back them up and make them portable.
+    </section>
+    <section class="card">
+        <h2>Valuation Bands</h2>
+          While we can easily sort companies by their score and find the companies with great fundamentals, the green and blue bands highlight the companies that are currently trading at lucrative valuations. At any stage We maintain 5% companies in the green or blue band, with around 1% companies in the green band. A company is 'branded' green or blue based on the following conditions:
+          <ul>
+            <li><b>Green:</b> If a company has a high score (greater than the range mentioned Settings page) and both PE and PEG are positive and within the range mentioned in the settings page.</li>
+            <li><b>Blue:</b> If a company has average score (between the range mentioned Settings page) and both PE and PEG are positive and within the range mentioned in the settings page.</li>
+          </ul>
+          You can filter <i>in</i> the highlighted companies by searching for "/green", "/blue" or "/all" (without quotes but / included).<br>
+          <br>
+          Use the Settings page to change condition for the green and blue bands based on your needs.
+    </section>
+    <section class="card">
+        <h2>Charts</h2>
+          InvestR lets you explore companies visually via a bubble chart, a scatter chart or a bar chart. The "Sectors" tab displays a bubble chart that shows companies within a selected sector. The "All" tab displays a scatter chart that plots ALL the companies in the database based on the selected X and Y axis. Clicking on <i class="fa fa-bar-chart" aria-hidden="true"></i> besides a company's name will open a detailed bar chart page that will show the historical scores and the fundamental parameters of a company. <br>
+          <br>
+          Note: As the score is a combination of fundamentals and valuations, in the short term, a fall in stock price might increase the score a bit (couple of points) as the valuations become cheaper and vice-versa. But big changes to score will occur after the quarterly results as a change to the fundamentals of a company has a stronger effect on score and over a period of an year or so, price should move in sync with the score. Score will also change if We tweak the weightages that help generate the Optimized score, this change will not have any relationship with price. Historical Score database is updated at midnight on weekdays.
+    </section>
+    <section class="card">
+        <h2>Metadata Around Company's Name</h2>
+          Name of the company is followed by the following meta-data:
+          <ul>
+            <li>Link To Google Finance: Clicking on the company's name will take you to the Google Finance page of that company.</li>
+            <li>Last Quarter Name: Name of the last quarter for which the results have been updated.</li>
+            <li><i class="fa fa-bar-chart" aria-hidden="true"></i>: Clicking on the icon will take you to the detailed chart page.</li>
+            <li><i class="fa fa-users" aria-hidden="true"></i>: Clicking on the icon will take you to the peer comparision charts page.</li>
+            <li><i class="fa fa-bullseye" aria-hidden="true"></i>: Appears if a company has shown consistent growth over the last 5 quarters. Consistency is calculated by using Python's (numpy.sdt()) Standard Deviation function.</li>
+            <li><i class="fa fa-inr" aria-hidden="true"></i>: Appears if a company's share price is currently less than its 30 day moving average.</li>
+            <li><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>: Appears if a company's fundamentals are shaky inspite of a decent score (because of turn round or extra-ordinary income or one time income) and acts as a warning to do deeper investigation.</li>
+            <li><i class="fa fa-diamond" aria-hidden="true"></i>: Appears if the company is looking good both fundamentally as well as by valuations. You might still want to check the volumes traded and google for any recent adverse news on the company that could have made the valuations cheaper overnight.</li>
+            <li><i class="fa fa-balance-scale" aria-hidden="true"></i>: Appears if the topline growth and the bottom line growth of a company are in sync. If they are in sync then it is likely that the bottom line growth of the company is due to the revenue increase and not because of any other income. It also means that the EPS growth is consistent with the profit growth and there has not been any major equity dilution.</li>
+          </ul>
+    </section>
+    <section class="card">
+        <h2>How to decide on values for personalized weights</h2>
+        While you can use the optimized settings and start getting immediate benefits from Investr, the true power of Investr lies in its ability to let <b>you</b> decide what is important for you. <br>
+        <br>
+        You can start by playing around with the settings and observing which companies pop up at the top. If you are having fundamental information about few companies then check the scores of those companies and compare it against your knowldege and how see you feel about it. Keep repeating this until you hit the sweet spot.
+    </section>
+    <section class="card">
+        <h2>High-Low PE Range</h2>
+        As you are aware companies trade in their own PE band based on how the market values the sector of the company and the company itself. If we observe a company over multiple years we can see that there is an average-approximate lower and higher band for every company and the company's PE stays within this band for most of the time. When the PE of the company falls below the lower end, it comes up again rather quickly and when the PE of the company rises above the higher end, it comes down again rather quickly. Hence it makes sense to track these higher and lower bands to see how the company is currently valued.<br>
+        <br>
+        It is also nice to know the High-PE/Low-PE ratio. Companies with a ratio close to 1 can be considered more consistent valuation-wise. We created a histogram and found 1.5 to be a good boundary for consistency. Which means that companies for which the ratio is between 1 and 1.5 can be considered consistent.<br>
+        <br>
+        All this information is available in the "Analysis" tool tip and on the charts page.<br>
+        <br>
+        Of course, when a stock gets re-rated based on its performance the High/Low PEs ranges will not be valid and time needs to be given to see of the stocks settles down in the new range and creates new High/Low PE rages.
+    </section>
+    <section class="card">
+        <h2>Watchlist</h2>
+        Investr lets you create a watchlist so that you can track the companies of your choice together at one glance. On the Watchlist page, you can select one or more companies and click the "Add to Watchlist" button. You can see your watchlisted companies by searching for "watchlist" in the search box. You can also remove companies from the watchlist by selecting the companies in the watchlist and clicking the "Remove from Watchlist" button.
+    </section>
+    <section class="card">
+        <h2>Sign-In</h2>
+        You can sign into InvestR using your Google ID. Settings and/or Watchlist saved AFTER signing in will be available across all your devices. Signed In user can also opt-in to receive email when companies in their watchlist trade below their 30 day moving average. Users need to enable this option by selecting the check box in the Settings page. Signed in user will also receive personalized notices that can be checked by hovering the mouse over <i class="fa fa-bell" aria-hidden="true"></i>. The bell icon will turn red when there is an unread notice. NOTE: Signed In users will NOT receive any email unless they explicitly opt for it.
+    </section>
+    <section class="card">
+        <h2>Difference in stock price</h2>
+        You must have observed the difference in the price of the stock shown on Investr and other websites. This is because Investr does <b>not</b> show live stock prices. Prices are updated at 9:30am, 10am, 12:30pm, 3pm and 4pm and the scores are then refreshed.
+    </section>
+    <section class="card">
+        <h2>My InvestR Workflow</h2>
+        <a href="http://chiragr.me/post/160401769757/my-investr-workflow">An InvestR user asked me, how We go about using the site. So We thought of writing my buy and sell workflow. Please note that this workflow is 80% of my thought process, rest 20% will fluctuate. We also sometimes (rarely?)  break my rules, but when We do break them We am aware why We am breaking them.</a>
+    </section>
+    <section class="card">
+        <h2>Specific questions</h4>
+        If you have any specific questions then feel free to mail them to me at <a href="mailto:yourmailid@yourmailprovider.com?Subject=Hi!">yourmailid@yourmailprovider.com</a>.
+    </section>
+</div>
+<div id="footer"></div>
+</body>
+</html>
+

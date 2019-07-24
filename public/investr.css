@@ -1,0 +1,114 @@
+/* Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line) */
+
+html {
+    font-size:100%;
+}
+
+body {
+    font-family: Verdana;
+}
+
+a {
+    color:inherit;
+    text-decoration: none;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+footer {
+    color: grey;
+    text-align: center;
+}
+
+hr.thin {
+    height: 1px;
+    border: 0;
+    color: #D3D3D3;
+    background-color: #D3D3D3;
+}
+
+/* Class */
+.userNameCircle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+
+    width: 13px;
+    height: 13px;
+    padding: 2px;
+
+    background: #000;
+    color: #fff;
+    text-align: center;
+
+    font: 12px Arial, sans-serif;
+}
+
+.ratingsCircle {
+    border-radius: 50%;
+    width: 18px;
+    height: 14px;
+    padding: 0px 3px 0px 3px;
+    text-align: center;
+    vertical-align: middle;
+
+    color: white;
+    background: black;
+
+    font-size:90%
+  /*
+    border-radius: 20px;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8
+
+    padding: 1px 2px 1px 2px ;
+
+    background: #000;
+    text-align: center;
+
+    font-size:80%;*/
+}
+
+
+.inLineHelp {
+    font-size:12px;
+    color:gray;
+}
+
+.settingHeader {
+    vertical-align: top;
+}
+
+.companyCharts {
+    width: 800px;
+    height: 400px;
+}
+
+.vSeparate {
+    float:right;
+    padding-top:8px;
+    padding-left:3px;
+    padding-right:3px;
+    color:rgb(213,213,213);
+}
+
+/* Datatables */
+.dataTables_wrapper .dataTables_length {
+    float: right;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    float: left;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    width: 300px
+}
+
+@media screen and (max-width: 600px) {
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        float: none;
+        text-align: center;
+    }
+}

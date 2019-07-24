@@ -1,0 +1,136 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="theme-color" content="#91A500"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="HandheldFriendly" content="true"/>
+
+<title>Investr.co.in Contact</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="investr.css">
+<link rel="stylesheet" type="text/css" href="nowcards.css">
+
+<script type="text/javascript">
+
+    function getGrowth(earlier, later) {
+        return (later-earlier)*100/earlier;
+    }
+
+    $(function() {
+        var restURL = '/portfolioGrowth';
+        $.getJSON(restURL, function(d) {
+
+            var dt = new Array();
+            var move = new Array();
+            var current = new Array();
+            var notes = new Array();
+            var ytd = 0.0;
+            var ytdGrowth = 0.0;
+            var lastMove = parseFloat(d[d.length-1]['M']);
+            var lastCurrent = parseFloat(d[d.length-1]['C']);
+            var lastWeeksGrowth = getGrowth(parseFloat(d[d.length-6]['C']), lastCurrent);
+            var lastMonthsGrowth = getGrowth(parseFloat(d[d.length-30]['C']), lastCurrent);
+            var ttmGrowth = getGrowth(parseFloat(d[d.length-364]['C']), lastCurrent);
+
+            for (var i = 0; i < d.length; i++) {
+                dt.push(d[i]['D']);
+                move.push(parseFloat(d[i]['M']));
+                current.push(parseFloat(d[i]['C']));
+                notes.push(d[i]['N']);
+
+                if (d[i]['D'] === "2017-12-31")
+                    ytd = parseFloat(d[i]['C']);
+            }
+            ytdGrowth = getGrowth(ytd, lastCurrent);
+
+            google.charts.load('current', {'packages':['annotationchart', 'calendar', 'gauge', 'corechart']});
+
+            google.charts.setOnLoadCallback(drawGuageChart);
+            function drawGuageChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Label', 'Value'],
+                    ['Day', lastMove],
+                    ['Week', lastWeeksGrowth],
+                    ['Month', lastMonthsGrowth],
+                    ['TTM', ttmGrowth],
+                    ['YTD', ytdGrowth]
+                ]);
+
+                var options = {
+                    width: 700, height: 150,
+                    min: -10,
+                    max: 20,
+                    redFrom: -10, redTo: 0,
+                    yellowFrom: 0, yellowTo: 10,
+                    greenFrom: 10, greenTo: 20,
+                    minorTicks: 1
+                };
+
+                var chart = new google.visualization.Gauge(document.getElementById('guage_chart_div'));
+                chart.draw(data, options);
+            }
+
+            google.charts.setOnLoadCallback(drawATLChart);
+            function drawATLChart() {
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('date', 'Date');
+                data.addColumn('number', 'Current');
+                data.addColumn('string', 'Notes');
+
+                for(i = 0; i < dt.length; i++) {
+                    data.addRow([new Date(dt[i]), current[i], notes[i]]);
+                }
+
+                var chart = new google.visualization.AnnotationChart(document.getElementById('timeline_chart_div'));
+                chart.draw(data, {displayAnnotations: true, min:100});
+            }
+        });
+    });
+</script>
+
+</head>
+<body>
+<div id="envelop">
+    <section class="card">
+        <h1>Contact</h1>
+    </section>
+    <section class="card">
+        Hi!<br>
+        <br>
+        We am Chirag.<br>
+        <br>
+        We started working on a "system" that would help me make buy/sell decisions for the Indian equities in mid-2014. That system, which can be called the grand-father of InvestR, was contained within 1 Google Spreadsheet. While there was a lot of manual effort to keep it updated, it did its job of scoring companies. Because of the lack of automation the number of companies tracked was limited.<br>
+        <br>
+        So to automate the process, We wrote a bunch of Python scripts. With this change the number of companies tracked increased to 200. The front end was still Google Spreadsheets. This system can be called the father of InvestR. And it did its job by popping up companies like Yes Bank and Biocon many many months before they became street favorites.<br>
+        <br>
+        As We tried to cast my net wider by adding more companies, maintaining a spreadsheet became difficult. We was also not able to efficiently do a lot of analysis that was in my mind. So eventually We decided to move the data into a database.<br>
+        <br>
+        Initially We ran the system from my Raspberry Pi, but quickly decided to get a bit more adventurous and move the system to Amazon's EC2 server. We also registered the domain investr.co.in.<br>
+        <br>
+        We re-wrote most of the old code and the "system" that was born in mid 2014 became https://investr.co.in. We kept adding features as and when We needed them. Thing is, We am an investor first and a programmer later. So We would avoid adding a feature unless the investor within me forces the programmer within me to code the feature. And so, line by line, method by method InvestR took shape.<br>
+        <br>
+        After the site went live, We bought a bunch of companies that popped up using my Optimized ratings (Note that, the Optimized weights were a bit different from the weights that We used in the spreadsheet). We invested small amounts in these companies to test the system. And they turned out great! So We got more confidence. Unfortunately most of the companies listed above had already rallied and had gone out of the buy range so InvestR was no longer filtering them. So We bought the second set of companies that popped up in the Optimized ratings. By now the markets had rallied and good deals were hard to come by. We tweaked my tolerance and tried to squeeze out any pending good deals.<br>
+    </section>
+    <section class="card">
+        We also offer consulting services. If you are new to investing and want to learn about equity investing or want help in creating or balancing your portfolio then drop an email at <a href="mailto:yourmailid@yourmailprovider.com?Subject=Hi!">yourmailid@yourmailprovider.com</a>.
+    </section>
+    <section class="card">
+        <br>
+        <br>
+        TTYL!
+    </section>
+ </div>
+<div id="footer"></div>
+</body>
+</html>
+

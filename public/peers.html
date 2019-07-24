@@ -1,0 +1,79 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="investr.css">
+        <link rel="stylesheet" type="text/css" href="nowcards.css">
+        <script type="text/javascript">$(function(){drawPeersChart(getURLParameter("sector"), getURLParameter("sectors"), getURLParameter("srcStockId"));logUserSessions();});</script>
+    </head>
+    <body>
+        <center>
+            <section class="card">
+            <h1>Comparing Companies Within <span id="sector"></span> Sector</h1>
+            <h2>(You Can Navigate To <span id="sectors"></span> Sectors Too!)</h2>
+            </section>
+            <section class="card">
+                <div>Price of <span id="cName"></span> At Peer Valuations Is <span id="fairPrice"></span> Rs.</div>
+            </section>
+            <section class="card">
+                <h1>Peer Price to Earnings</h1>
+                <div class="companyCharts" id="pe_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer Price to Book Value</h1>
+                <div class="companyCharts" id="pbv_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer Price to Sales</h1>
+                <div class="companyCharts" id="ps_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer EV to EBITDA</h1>
+                <div class="companyCharts" id="evebitda_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer Return on Assets</h1>
+                <div class="companyCharts" id="roa_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer Current Ratio</h1>
+                <div class="companyCharts" id="cr_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer Profit Margin</h1>
+                <div class="companyCharts" id="margins_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer Dividend Yield</h1>
+                <div class="companyCharts" id="dy_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer TTM Topline Growth</h1>
+                <div class="companyCharts" id="ettmg_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer TTM EPS Growth</h1>
+                <div class="companyCharts" id="epsttmg_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer TTM Margin Growth</h1>
+                <div class="companyCharts" id="mttmg_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer YoY Quarterly Topline Growth</h1>
+                <div class="companyCharts" id="eyg_chart"></div>
+            </section>
+            <section class="card">
+                <h1>Peer QoQ Quarterly Topline Growth</h1>
+                <div class="companyCharts" id="eqg_chart"></div>
+            </section>
+        </center>
+        <div id="footer"></div>
+    </body>
+</html>

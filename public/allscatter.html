@@ -1,0 +1,42 @@
+<!–– 
+Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
+––>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="True" name="HandheldFriendly"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="viewport" content="width=device-width"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" charset="utf8" src="investr.min.js"></script>
+        <script> google.charts.load('current', {'packages':['corechart']}); </script>
+
+        <link rel="stylesheet" type="text/css" href="investr.css">
+    </head>
+    <body>
+        <div align="center">
+            <select id="xAxisDDL">
+                <option value="XXX" selected="selected">Select X Axis</option>
+                <option value="S">Optimized Score</option>
+                <option value="PE">PE</option>
+                <option value="DY">Dividend Yield</option>
+                <option value="PBV">Price To Book</option>
+                <option value="V">Profit Margin</option>
+                <option value="U">Interest/Provisions</option>
+            </select>
+            <select id="yAxisDDL">
+                <option value="XXX" selected="selected">Select Y Axis</option>
+                <option value="PE">PE</option>
+                <option value="DY">Dividend Yield</option>
+                <option value="PBV">Price To Book</option>
+                <option value="V">Profit Margin</option>
+                <option value="U">Interest/Provisions</option>
+            </select>
+            <input type="button" value="Re-Draw Chart" onclick="drawAllScatterChart();" id="drawChart"/>
+        </div>
+        <div id="scatter_chart_div" style="width: 1100px; height: 500;"></div>
+        <div id="footer"></div>
+    </body>
+</html>
