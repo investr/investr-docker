@@ -67,7 +67,8 @@ def main():
         if emailBody:
             footerMessage = "\nSearch for \"Sep 18\" to search for companies whose Q4 results are out."
             emailBody = emailBody + footerMessage
-            mail(email, "List of your watchlist stocks trading below their 30 DMA", emailBody)
+            # To enable email notification you need to first setup utils.py and then uncomment the line below
+            # mail(email, "List of your watchlist stocks trading below their 30 DMA", emailBody)
 
     mysqlCur.close()
     mysqlCon.close()

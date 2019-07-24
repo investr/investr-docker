@@ -50,12 +50,8 @@ def main():
                 exceptionRaised = 1
                 continue
 
-        if exceptionRaised == 1:
-            mail('yourmailid@yourmailprovider.com', 'Exception raised during share update: While inserting data!', '')
-
     except:
         logging.info(traceback.format_exc())
-        mail('yourmailid@yourmailprovider.com', 'Exception raised during share update: While accessing sheet!', '')
 
     finally:
         con.commit()

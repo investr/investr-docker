@@ -182,23 +182,12 @@ def main():
 
                 emailBody = emailBody + str(myid) + ' ' + mcName + '\n'
 
-                # If last qtr was Jun 19 then trigger the yearly update
-                if LAST_QUARTER == 'Jun 19':
-                    try:
-                        logging.info('Running manualYearUpdate.py on ... ' + str(myid))
-
-                        myucmd = '/home/ec2-user/python/yearUpdate.py ' + str(myid)
-                        os.system(myucmd)
-
-                    except:
-                        logging.info('Exception while running manualYearUpdate.py on ... ' + str(myid))
-                        continue
-
             except:
                 logging.info('Exception raised while processing: ' + str(myid))
                 logging.info(traceback.format_exc())
 
-        mail("yourmailid@yourmailprovider.com", "Quarterly update completed successful run!", emailBody)
+        # To enable email notification you need to first setup utils.py and then uncomment the line below
+        # mail("yourmailid@yourmailprovider.com", "Quarterly update completed successful run!", emailBody)
 
     except lite.Error as er:
         logging.info(er)

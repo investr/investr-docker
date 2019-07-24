@@ -66,8 +66,6 @@ def main():
                 logging.info('Exception raised while processing: ' + str(myid))
                 logging.info(traceback.format_exc())
 
-        # mail("yourmailid@yourmailprovider.com", "Quarterly update completed successful run!", "")
-
     except lite.Error as er:
         logging.info(er)
     finally:

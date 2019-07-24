@@ -53,7 +53,6 @@ def main():
 
     except:
         logging.info(traceback.format_exc())
-        mail('yourmailid@yourmailprovider.com', 'Exception raised during share update: While accessing sheet!', '')
 
     finally:
         con.commit()
