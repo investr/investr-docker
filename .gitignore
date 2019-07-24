@@ -2,6 +2,5 @@ public/composer.json
 public/composer.lock
 public/vendor/
 mysql/*.csv
-bookkeeping/*.db
 bookkeeping/*.pyc
 bookkeeping/logs/*.log
