@@ -1,7 +1,3 @@
-//
-// Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
-//
-
 // First thing we do is, load the user customizations from the DB if the user is logged in
 loadUserCustomizations();
 
@@ -61,7 +57,7 @@ var CR_TOLERANCE = 2;
 var DAYS_SCORE_SAVED = 7;
 
 // Controls how many stocks are fetched from the database.
-var rowLimit = '25';
+var rowLimit = '1000';
 if (isUserLoggedIn()) {
     if (isMembershipActive()) {
         rowLimit = '1000';
@@ -1186,7 +1182,7 @@ function helpTooltip() {
                 classes: 'qtip-dark qtip-rounded qtip-shadow'
             },
             content: {
-                text: "Thank you for supporting InvestR by sending an Amazon Gift Card to youremail@yourmailprovider.com! :-)"
+                text: "Thank you for supporting InvestR by sending an Amazon Gift Card to chirag.rathod+investr@gmail.com! :-)"
             },
             position: {
                 my: 'top center',
@@ -3832,7 +3828,7 @@ function getAccountInfo() {
                     "<i class='inLineHelp'>Payment verification pending. Generally takes a day!</i>";
             } else if (["UNPAID"].indexOf(d.MEMBERSHIP_STATUS) > -1) {
                 document.getElementById('paidButton').innerHTML =
-                    "<i class='inLineHelp'>Payment verification failed. Please mail youremail@yourmailprovider.com with payment details!</i>";
+                    "<i class='inLineHelp'>Payment verification failed. Please mail chirag.rathod+investr@gmail.com with payment details!</i>";
             } else if (["ACTIVE"].indexOf(d.MEMBERSHIP_STATUS) > -1) {
                 document.getElementById('paidButton').innerHTML =
                     "<i class='inLineHelp'>Thank you for supporting InvestR! Please renew before: " + expiryDate + "</i>";
