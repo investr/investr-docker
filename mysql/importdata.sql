@@ -1,3 +1,7 @@
+DELETE FROM MASTER;
+DELETE FROM SCORE;
+DELETE FROM HISTORICAL_SCORE;
+
 load data local infile '/var/lib/mysql-files/ec2score.csv' into table SCORE fields terminated by ',' enclosed by '"' lines terminated by '\n'
 (
     ID                                      ,
@@ -168,5 +172,22 @@ load data local infile '/var/lib/mysql-files/ec2master.csv' into table MASTER fi
     ATTR13                              ,
     ATTR14                              ,
     ATTR15
+);
+
+load data local infile '/var/lib/mysql-files/ec2HisScr.csv' into table HISTORICAL_SCORE fields terminated by ',' enclosed by '"' lines terminated by '\n'
+(
+    STOCK_ID,
+    DT,
+    SCORE,
+    SCORE_CHANGE,
+    SCORE_HIGH,
+    SCORE_LOW,
+    PRICE,
+    COMMENT,
+    ATTR1,
+    ATTR2,
+    ATTR3,
+    ATTR4,
+    ATTR5
 );
 COMMIT;
