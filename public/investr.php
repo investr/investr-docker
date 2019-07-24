@@ -418,7 +418,7 @@ function generateAccountJSON($response, $userEmail)
 
                 $db = null;
 
-                return $response->withStatus(200)->withJson($output);
+                echo json_encode($output);
             }
         } else {
             echo 0;
@@ -452,7 +452,7 @@ function generateNoticeJSON($response, $userEmail)
 
             $db = null;
 
-            return $response->withStatus(200)->withJson($output);
+            echo json_encode($output);
         } else {
             echo 0;
         }
@@ -497,7 +497,7 @@ function generateSimilarJSON($response, $stockID)
 
         $db = null;
 
-        return $response->withStatus(200)->withJson($output);
+        echo json_encode($output);
 
     } catch(PDOException $e) {
         $response->withStatus(404)->write($e->getMessage());
@@ -523,7 +523,7 @@ function generateWatchlistJSON($response, $userID, $rowLimit)
 
             $db = null;
 
-            return $response->withStatus(200)->withJson($output);
+            echo json_encode($output);
         } else {
             throw new PDOException('No records found.');
         }
@@ -551,7 +551,7 @@ function generatePeersJSON($response, $sector, $rowLimit)
 
             $db = null;
 
-            return $response->withStatus(200)->withJson($output);
+            echo json_encode($output);
         } else {
             throw new PDOException('No records found.');
         }
@@ -570,14 +570,15 @@ function generateStockJSON($response, $stockID)
         $stmt->bindParam(1, intval($stockID), PDO::PARAM_INT);
 
         $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+       
         if($row) {
             $output = getOutputForStockID($row);
 
             $db = null;
 
-            return $response->withStatus(200)->withJson($output);
+            echo json_encode($output);
       } else {
             throw new PDOException('No records found.');
         }
@@ -608,7 +609,7 @@ function generateHistoricalScoreJSON($response, $stockID)
 
             $db = null;
 
-            return $response->withStatus(200)->withJson($output);
+            echo json_encode($output);
         } else {
             throw new PDOException('No records found.');
         }
@@ -651,7 +652,7 @@ function generateWtsJSON($response, $wts, $rowLimit)
 
             $db = null;
 
-            return $response->withStatus(200)->withJson($output);
+            echo json_encode($output);
 	    } else {
             throw new PDOException('No records found.');
         }
@@ -687,7 +688,7 @@ function generatePortfolioGrowthJSON($response, $userEmail)
 
             $db = null;
 
-            return $response->withStatus(200)->withJson($output);
+            echo json_encode($output);
         } else {
             throw new PDOException('No records found.');
         }
@@ -721,7 +722,7 @@ function generateEarningsJSON($response)
 
             $db = null;
 
-            return $response->withStatus(200)->withJson($output);
+            echo json_encode($output);
         } else {
             throw new PDOException('No records found.');
         }
