@@ -1,6 +1,6 @@
 # InvestR Stock Screener
 
-InvestR is a stock screener for Indian equties built on the standard LEMP stack. 
+InvestR is a stock screener for Indian equties built on the standard LEMP stack.
 
 ## InvestR has two parts: 
 - The Webapp
@@ -79,6 +79,15 @@ To import data from .csv files (that has been exported from the SQLite DB) we ca
 
 `./mysql/importdata.sh`
 
+### Set DB Host value
+*This needs to be done every time you launch your containers*
+
+`docker inspect <container name/id> | grep -i ipaddress`
+
+Set value of `$dbhost` in `./public/investr.php` to the IP obtained above. 
+
+I need to find a way to use a DB host value that does not change on every launch.
+
 ### Start the containers for testing
 
 `docker-compose up`
@@ -91,6 +100,6 @@ Lastly, you will need to configure Google SigIn. You can either configure it or 
 
 ## Information regarding executing the back-end scripts in bookkeeping folder
 
-* Go thru crontab_ec2.bkup to see which scripts are being executed and at what times
-* Currently the scripts are configured to use Google Spreadsheets for getting some information like viz. price. Change the scripts appropriately to use your Google Sheets information. If you want to continue with my approach then get gspread module to work and message me. I will share the required spreadsheets.
-* Alternatively, you can figure out your own way to refresh data if you wish.
+- Go thru crontab_ec2.bkup to see which scripts are being executed and at what times
+- Currently the scripts are configured to use Google Spreadsheets for getting some information like viz. price. Change the scripts appropriately to use your Google Sheets information. If you want to continue with my approach then get gspread module to work and message me. I will share the required spreadsheets.
+- Alternatively, you can figure out your own way to refresh data if you wish.
