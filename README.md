@@ -27,6 +27,16 @@ and then install Slim using the following command:
 
 `docker run --rm -v $(pwd):/app composer/composer:latest require slim/slim "^3.0"`
 
+### Exporting MASTER, SCORE and HISTORICAL SCORE from Sqlite DB to CSV file
+
+To export data from the MASTER, SCORE and HISTORICAL_SCORE tables of Sqlite DB into the CSV file so that I can later be imported into MySql we need to run the following command:
+
+`./bookkeeping/exportdata.sh`
+
 ### Importing MASTER and SCORE data from .csv files into MySql
+To import data from .csv files (that has been exported from the SQLite DB) we can either run the following shell script:
+`./mysql/importdata.sh`
+
+or the following command:
 
 `cat ./mysql/importdata.sql | docker exec -i investr-docker-mysql mysql -uroot -padmin investr`

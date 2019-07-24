@@ -198,3 +198,4 @@
 122.171.115.245 - - [24/Jul/2019:07:39:17 +0000] "GET /api/wts/opt/25?_=1563953957363 HTTP/1.1" 200 13510 "http://investr.co.in:8080/opt.html" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0"
 122.171.115.245 - - [24/Jul/2019:07:39:40 +0000] "GET /watchlist.html HTTP/1.1" 200 6615 "http://investr.co.in:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0"
 122.171.115.245 - - [24/Jul/2019:07:39:41 +0000] "GET /api/wts/opt/25?_=1563953980914 HTTP/1.1" 200 13510 "http://investr.co.in:8080/watchlist.html" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0"
+82.79.151.176 - - [24/Jul/2019:08:03:06 +0000] "GET / HTTP/1.1" 200 612 "-" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36" "-"

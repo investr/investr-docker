@@ -1,0 +1,21 @@
+# Following lines are for InvestR book-keeping
+# During market hours: Between 9AM to 4PM
+00       9     * * *     rm -rf /home/ec2-user/bookkeeping/logs/*.*          >> /home/ec2-user/bookkeeping/logs/rmlogs_cron.log     2>&1 &
+30       9     * * 1-5   /home/ec2-user/bookkeeping/priceUpdate.sh           >> /home/ec2-user/bookkeeping/logs/priceUpdate_cron.log 2>&1 &
+*/30     10-15 * * 1-5   /home/ec2-user/bookkeeping/priceUpdate.sh           >> /home/ec2-user/bookkeeping/logs/priceUpdate_cron.log 2>&1 &
+00       16    * * 1-5   /home/ec2-user/bookkeeping/priceUpdate.sh           >> /home/ec2-user/bookkeeping/logs/priceUpdate_cron.log 2>&1 &
+
+#
+# At night
+#
+# Updates qtrly results. Will be run only during result season
+30       21    * * 1-5   /home/ec2-user/bookkeeping/qtrUpdate.sh             >> /home/ec2-user/bookkeeping/logs/qtrUpdate_cron.log 2>&1 &
+# Update historical score, standard deviation, DMAs and score
+00       22    * * 1-5   /home/ec2-user/bookkeeping/historicalScoreUpdate.py >> /home/ec2-user/bookkeeping/logs/historicalScoreUpdate.log 2>&1 &
+01       22    * * 1-5   /home/ec2-user/bookkeeping/scoreChange.py           >> /home/ec2-user/bookkeeping/logs/scoreChange_cron.log 2>&1 &
+02       22    * * 1-5   /home/ec2-user/bookkeeping/200dmaUpdate.py          >> /home/ec2-user/bookkeeping/logs/200dmaUpdate.log 2>&1 &
+03       22    * * 1-5   /home/ec2-user/bookkeeping/stdDevDMAUpdate.py       >> /home/ec2-user/bookkeeping/logs/stdDevDMAUpdate_cron.log 2>&1 &
+04       22    * * 1-5   /home/ec2-user/bookkeeping/updatePeRange.py         >> /home/ec2-user/bookkeeping/logs/updatePeRange_cron.log 2>&1 &
+05       22    * * 1-5   /home/ec2-user/bookkeeping/shareUpdateSet.py        >> /home/ec2-user/bookkeeping/logs/shareUpdateSet_cron.log 2>&1 &
+06       22    * * 1-5   /home/ec2-user/bookkeeping/refreshBackend.sh        >> /home/ec2-user/bookkeeping/logs/refreshBackend_cron.log 2>&1 &
+07       22    * * 1-5   /home/ec2-user/bookkeeping/updateTtmEpsSheet.py     >> /home/ec2-user/bookkeeping/logs/updateTtmEpsSheet_cron.log 2>&1 &
