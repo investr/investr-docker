@@ -1,3 +1,4 @@
 public/composer.json
 public/composer.lock
 public/vendor/
+mysql/*.csv

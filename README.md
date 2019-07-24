@@ -27,3 +27,6 @@ and then install Slim using the following command:
 
 `docker run --rm -v $(pwd):/app composer/composer:latest require slim/slim "^3.0"`
 
+### Importing MASTER and SCORE data from .csv files into MySql
+
+`cat ./mysql/importmasterscore.sql | docker exec -i investr-docker-mysql mysql -uroot -padmin investr`
