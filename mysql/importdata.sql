@@ -174,7 +174,7 @@ load data local infile '/var/lib/mysql-files/ec2master.csv' into table MASTER fi
     ATTR15
 );
 
-load data local infile '/var/lib/mysql-files/ec2HisScr.csv' into table HISTORICAL_SCORE fields terminated by ',' enclosed by '"' lines terminated by '\n'
+load data local infile '/var/lib/mysql-files/ec2hisscr.csv' into table HISTORICAL_SCORE fields terminated by ',' enclosed by '"' lines terminated by '\n'
 (
     STOCK_ID,
     DT,
