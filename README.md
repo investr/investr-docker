@@ -2,7 +2,7 @@
 
 InvestR is a stock screener for Indian equties built on the standard LEMP stack.
 
-Many thanks to https://github.com/cbzxt for resurrecting the screener at https://investr.xyz
+Many thanks to https://github.com/cbzxt for resurrecting the screener at https://investr.xyz (work in progress).
 
 ## InvestR has two parts: 
 - The Webapp
