@@ -105,5 +105,5 @@ Lastly, you will need to configure Google SigIn. You can either configure it or 
 - Go thru crontab_ec2.bkup to see which scripts are being executed and at what times
 - Currently the scripts are configured to use Google Spreadsheets for getting some information like viz. price. Change the scripts appropriately to use your Google Sheets information. If you want to continue with my approach then get gspread module to work and message me. I will share the required spreadsheets.
 - Alternatively, you can figure out your own way to refresh data if you wish.
-- I will periodically keep updating `ec2stocks.db` with the latest data, so that initially you dont have to worry about the backend refresh to Sqlite DB.
+- I will update https://investr.co.in/ec2stocks.tar.gz with the latest data every night at 10:30pm, so that initially you dont have to worry about the backend refresh to Sqlite DB.
 
