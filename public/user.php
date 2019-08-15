@@ -1,7 +1,9 @@
 <?php
+
 //
 // Initially created by: Chirag Rathod for https://investr.co.in (Gentle Request: Please don't delete this line)
 //
+
 
 // Create connection to the database
 $conn = getConn();
@@ -31,14 +33,14 @@ if ($callFunc == "registerUser") {
 // we return the mail id. In case of any other error we return the error code.
 function registerUser() {
     global $conn;
-    mysql_select_db('investr', $conn);
+    mysqli_select_db($conn ,'investr');
 
     $name = $_POST['name'];
     $userEmail = $_POST['email'];
     $image = $_POST['image'];
 
     $insertStmt = "INSERT INTO USERS (NAME, EMAIL, IMAGE) VALUES ('$name', '$userEmail', '$image')";
-    $retval = mysql_query($insertStmt, $conn);
+    $retval = mysqli_query($conn, $insertStmt);
 
     if($retval) {
         // If the insert was successfull then we get the ID and insert it in the PREFS table
@@ -48,11 +50,11 @@ function registerUser() {
         $userId = getUserId($userEmail);
         $insertStmt = "INSERT INTO PREFS (USER_ID, DONATION, NOTES, MESSAGE)
                             VALUES ('$userId', 'FREE', NOW(), '2018-03-31 23:59:59')";
-        mysql_query($insertStmt, $conn);
+        mysqli_query($conn, $insertStmt);
 
         echo $userEmail;
     } else {
-        $err = mysql_errno();
+        $err = mysqli_errno($conn);
         if ($err == 1062)
             echo $userEmail;
         else
@@ -62,7 +64,7 @@ function registerUser() {
 
 function deleteUser() {
     global $conn;
-    mysql_select_db('investr', $conn);
+    mysqli_select_db($conn, 'investr');
 
     $userEmail = $_POST['email'];
 
@@ -70,19 +72,19 @@ function deleteUser() {
 
     // Delete any unsent notificaitons
     $deleteStmt = "DELETE FROM NOTIFICATIONS WHERE SEND_TO_USER_ID = '$userId'";
-    $retval1 = mysql_query($deleteStmt, $conn);
+    $retval1 = mysqli_query($conn, $deleteStmt);
 
     // Delete any watchlist stocks
     $deleteStmt = "DELETE FROM WATCHLIST WHERE USER_ID = '$userId'";
-    $retval2 = mysql_query($deleteStmt, $conn);
+    $retval2 = mysqli_query($conn, $deleteStmt);
 
     // Delete any saved prefs
     $deleteStmt = "DELETE FROM PREFS WHERE USER_ID = '$userId'";
-    $retval3 = mysql_query($deleteStmt, $conn);
+    $retval3 = mysqli_query($conn, $deleteStmt);
 
     // Finally delete the user
     $deleteStmt = "DELETE FROM USERS WHERE ID = '$userId'";
-    $retval4 = mysql_query($deleteStmt, $conn);
+    $retval4 = mysqli_query($conn, $deleteStmt);
 
     if ($retval1 && $retval2 && $retval3 && $retval4) {
         // If all the deletes were successful then show success message to user
@@ -96,7 +98,7 @@ function deleteUser() {
 // If we are sent ALL then we get all the preferences. Else we will be sent individual names.
 function getPrefs() {
     global $conn;
-    mysql_select_db('investr', $conn);
+    mysqli_select_db($conn, 'investr');
 
     $userEmail = $_POST['userEmail'];
     $prefName = $_POST['prefName'];
@@ -109,10 +111,10 @@ function getPrefs() {
             $prefs = array();
             $selectStmt = "SELECT WEIGHT_PRESET, WEIGHTS, VALUATIONS, TOLERANCE, SHOW_TOOLTIPS, EMAIL_USER FROM PREFS WHERE USER_ID = '$userId' LIMIT 1";
 
-            $result = mysql_query($selectStmt, $conn);
+            $result = mysqli_query($conn, $selectStmt);
 
             if ($result) {
-                while ($row = mysql_fetch_object($result)) {
+                while ($row = mysqli_fetch_object($result)) {
                     $prefs[] = $row->WEIGHT_PRESET;
                     $prefs[] = $row->WEIGHTS;
                     $prefs[] = $row->VALUATIONS;
@@ -126,10 +128,10 @@ function getPrefs() {
             $prefs = null;
             $selectStmt = "SELECT " . $prefName . " FROM PREFS WHERE USER_ID = '$userId' LIMIT 1";
 
-            $result = mysql_query($selectStmt, $conn);
+            $result = mysqli_query($conn, $selectStmt);
 
             if ($result) {
-                while ($row = mysql_fetch_object($result)) {
+                while ($row = mysqli_fetch_object($result)) {
                     $prefs = $row->$prefName;
                 }
             }
@@ -140,7 +142,7 @@ function getPrefs() {
 
 function setPrefs() {
     global $conn;
-    mysql_select_db('investr', $conn);
+    mysqli_select_db($conn, 'investr');
 
     $userEmail = $_POST['userEmail'];
     $prefName = $_POST['prefName'];
@@ -150,12 +152,12 @@ function setPrefs() {
 
     $updateStmt = "UPDATE PREFS SET " . $prefName . " = '$prefs', ATTR2 = NOW() WHERE USER_ID = '$userId'";
 
-    $ret = mysql_query($updateStmt, $conn);
+    $ret = mysqli_query($conn, $updateStmt);
 }
 
 function getWatchlist() {
     global $conn;
-    mysql_select_db('investr', $conn);
+    mysqli_select_db($conn, 'investr');
 
     $userEmail = $_POST['userEmail'];
 
@@ -163,10 +165,10 @@ function getWatchlist() {
 
     // If user id is greater than 0, then we have a valid user
     if ($userId > 0) {
-        $result = mysql_query("SELECT STOCK_ID FROM WATCHLIST WHERE USER_ID = '$userId'", $conn);
+        $result = mysqli_query("SELECT STOCK_ID FROM WATCHLIST WHERE USER_ID = '$userId'", $conn);
 
         $currentStockIds[] = "";
-        while ($row = mysql_fetch_object($result)) {
+        while ($row = mysqli_fetch_object($result)) {
             $currentStockIds[] = $row->STOCK_ID;
         }
 
@@ -178,7 +180,7 @@ function getWatchlist() {
 
 function setWatchlist() {
     global $conn;
-    mysql_select_db('investr', $conn);
+    mysqli_select_db($conn, 'investr');
 
     $userEmail = $_POST['userEmail'];
     $stockIds = $_POST['stockIds'];
@@ -187,13 +189,13 @@ function setWatchlist() {
 
     $stockIdsArray = json_decode($stockIds);
     foreach ($stockIdsArray as $stockId) {
-        $ret = mysql_query("INSERT INTO WATCHLIST (USER_ID, STOCK_ID) VALUES ('$userId', '$stockId')", $conn);
+        $ret = mysqli_query($conn, "INSERT INTO WATCHLIST (USER_ID, STOCK_ID) VALUES ('$userId', '$stockId')");
     }
 }
 
 function deleteFromWatchlist() {
     global $conn;
-    mysql_select_db('investr', $conn);
+    mysqli_select_db($conn, 'investr');
 
     $userEmail = $_POST['userEmail'];
     $stockIds = $_POST['stockIds'];
@@ -202,21 +204,21 @@ function deleteFromWatchlist() {
 
     $stockIdsArray = json_decode($stockIds);
     foreach ($stockIdsArray as $stockId) {
-        $ret = mysql_query("DELETE FROM WATCHLIST WHERE USER_ID = '$userId' AND STOCK_ID = '$stockId'", $conn);
+        $ret = mysqli_query($conn, "DELETE FROM WATCHLIST WHERE USER_ID = '$userId' AND STOCK_ID = '$stockId'");
     }
 }
 
 function getNoticeCount() {
     global $conn;
-    mysql_select_db('investr', $conn);
+    mysqli_select_db($conn, 'investr');
 
     $userEmail = $_POST['userEmail'];
     $userId = getUserId($userEmail);
 
     // If user id is greater than 0, then we have a valid user
     if ($userId > 0) {
-        $result = mysql_query("SELECT * FROM NOTIFICATIONS WHERE SENT = 0 AND SEND_TO_USER_ID = '$userId'", $conn);
-        $num_rows = mysql_num_rows($result);
+        $result = mysqli_query($conn, "SELECT * FROM NOTIFICATIONS WHERE SENT = 0 AND SEND_TO_USER_ID = '$userId'");
+        $num_rows = mysqli_num_rows($result);
 
         echo $num_rows;
     } else {
@@ -230,14 +232,14 @@ function getNoticeCount() {
 
 function getUserId($userEmail) {
     global $conn;
-    mysql_select_db('investr', $conn);
+    mysqli_select_db($conn, 'investr');
 
     $userId = 0;
 
-    $result = mysql_query("SELECT ID FROM USERS WHERE EMAIL = '$userEmail' LIMIT 1", $conn);
+    $result = mysqli_query($conn, "SELECT ID FROM USERS WHERE EMAIL = '$userEmail' LIMIT 1");
 
     if ($result) {
-        while ($row = mysql_fetch_object($result)) {
+        while ($row = mysqli_fetch_object($result)) {
             $userId = $row->ID;
         }
     }
@@ -248,9 +250,9 @@ function getUserId($userEmail) {
 function getConn() {
     $dbhost = 'localhost';
     $dbuser = 'root';
-    $dbpass = '';
+    $dbpass = 'admin';		
 
-    $dbconn = mysql_connect($dbhost, $dbuser, $dbpass);
+    $dbconn = mysqli_connect($dbhost, $dbuser, $dbpass);
     return $dbconn;
 }
 
