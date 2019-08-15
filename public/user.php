@@ -165,7 +165,7 @@ function getWatchlist() {
 
     // If user id is greater than 0, then we have a valid user
     if ($userId > 0) {
-        $result = mysqli_query("SELECT STOCK_ID FROM WATCHLIST WHERE USER_ID = '$userId'", $conn);
+        $result = mysqli_query($conn, "SELECT STOCK_ID FROM WATCHLIST WHERE USER_ID = '$userId'");
 
         $currentStockIds[] = "";
         while ($row = mysqli_fetch_object($result)) {
