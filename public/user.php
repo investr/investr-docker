@@ -49,7 +49,7 @@ function registerUser() {
         // NOTE: MESSAGE - USED TRIAL EXPIRY TIME STAMP
         $userId = getUserId($userEmail);
         $insertStmt = "INSERT INTO PREFS (USER_ID, DONATION, NOTES, MESSAGE)
-                            VALUES ('$userId', 'FREE', NOW(), '2018-03-31 23:59:59')";
+                            VALUES ('$userId', 'FREE', NOW(), '2099-12-31 23:59:59')";
         mysqli_query($conn, $insertStmt);
 
         echo $userEmail;
