@@ -24,6 +24,8 @@ mysql:
     image: mariadb
     environment:
         MYSQL_ROOT_PASSWORD: admin
+    command:
+        --init-file /data/application/init.sql        
     volumes:
         - ./mysql:/var/lib/mysql-files
-
+        - ./mysql/init.sql:/data/application/init.sql
