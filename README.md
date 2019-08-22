@@ -2,7 +2,7 @@
 
 InvestR is a stock screener for Indian equties built on the standard LEMP stack.
 
-Many thanks to https://github.com/cbzxt for resurrecting the screener at https://investr.xyz (work in progress).
+Many thanks to https://github.com/cbzxt for resurrecting the screener at https://investr.xyz
 
 ## InvestR has two parts: 
 - The Webapp
@@ -21,7 +21,7 @@ I have "Dockerized" InvestR so that users can bring up the site with less effort
 - UglifyJS is used for minifying the JS
 
 ## Requirements for running the bookkeeping backend:
-Software requirements for in the bookkeeping backend have not been "Dockerized" as they are very standalone and can easily be run from the command line or as cron jobs. You need to install bunch of Python modules for this to work. Just run `grep import *.py` in the bookkeeping directory to get the list
+Software requirements for in the bookkeeping backend have not been "Dockerized" as they are very standalone and can easily be run from the command line or as cron jobs. You need to install bunch of Python modules for this to work. Just run `grep import *.py` in the bookkeeping directory to get the list or you can use pip install -r requirements.txt
 
 - Python (2.7 as of now. Better to upgrade to 3.0)
 - Sqlite DB
