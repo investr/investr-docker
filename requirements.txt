@@ -1,0 +1,9 @@
+datetime
+BeautifulSoup
+oauth2client
+progressbar
+gspread
+requests
+logging
+mysql
+requests
