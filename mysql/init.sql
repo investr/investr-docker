@@ -29,7 +29,7 @@ USE investr;
 -- Table structure for table `HISTORICAL_SCORE`
 --
 
-DROP TABLE IF EXISTS `HISTORICAL_SCORE`;
+-- DROP TABLE IF EXISTS `HISTORICAL_SCORE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `HISTORICAL_SCORE` (
@@ -53,7 +53,7 @@ CREATE TABLE `HISTORICAL_SCORE` (
 -- Table structure for table `MASTER`
 --
 
-DROP TABLE IF EXISTS `MASTER`;
+-- DROP TABLE IF EXISTS `MASTER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `MASTER` (
@@ -193,7 +193,7 @@ CREATE TABLE `MASTER` (
 -- Table structure for table `NOTIFICATIONS`
 --
 
-DROP TABLE IF EXISTS `NOTIFICATIONS`;
+-- DROP TABLE IF EXISTS `NOTIFICATIONS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `NOTIFICATIONS` (
@@ -207,7 +207,7 @@ CREATE TABLE `NOTIFICATIONS` (
 -- Table structure for table `PORTFOLIO_GROWTH`
 --
 
-DROP TABLE IF EXISTS `PORTFOLIO_GROWTH`;
+-- DROP TABLE IF EXISTS `PORTFOLIO_GROWTH`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PORTFOLIO_GROWTH` (
@@ -231,7 +231,7 @@ CREATE TABLE `PORTFOLIO_GROWTH` (
 -- Table structure for table `PREFS`
 --
 
-DROP TABLE IF EXISTS `PREFS`;
+-- DROP TABLE IF EXISTS `PREFS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PREFS` (
@@ -266,7 +266,7 @@ CREATE TABLE `PREFS` (
 -- Table structure for table `SCORE`
 --
 
-DROP TABLE IF EXISTS `SCORE`;
+-- DROP TABLE IF EXISTS `SCORE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `SCORE` (
@@ -314,7 +314,7 @@ CREATE TABLE `SCORE` (
 -- Table structure for table `USERS`
 --
 
-DROP TABLE IF EXISTS `USERS`;
+-- DROP TABLE IF EXISTS `USERS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `USERS` (
@@ -349,7 +349,7 @@ DELIMITER ;
 -- Table structure for table `WATCHLIST`
 --
 
-DROP TABLE IF EXISTS `WATCHLIST`;
+-- DROP TABLE IF EXISTS `WATCHLIST`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `WATCHLIST` (

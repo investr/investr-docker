@@ -64,11 +64,8 @@ and then install Slim using the following command:
 `docker run --rm -v $(pwd):/app composer/composer:latest require slim/slim "^3.0"`
 
 ### Create schemas in MySql database
-*This needs to be done only once.*
 
-`docker exec -i investr-docker-mysql sh -c 'exec mysql -uroot -p"admin"' < ./mysql/init.sql`
-
-(I tried to automate importing of schemas into our MySql instance using the .yml file but was not able to make a breakthrough. I plan to revisit it.)
+This will be automatically done with docker-compose up
 
 ### Export MASTER, SCORE and HISTORICAL SCORE from Sqlite DB to CSV file and import it in MySql DB
 *This needs to be done DAILY and/or after every time ec2stocks.db is updated via the Python scripts in bookkeeing folder*
